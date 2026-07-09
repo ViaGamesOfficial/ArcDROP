@@ -181,7 +181,9 @@ section.block{ padding-block:clamp(80px,11vw,150px); position:relative; }
 .class-row{ display:grid; grid-template-columns:auto 1fr; gap:18px; align-items:baseline; padding-bottom:14px; border-bottom:1px solid var(--line); }
 .class-row:last-child{ border-bottom:0; padding-bottom:0; }
 .class-row .name{ font-family:var(--font-display); font-weight:600; font-size:18px; color:var(--ink); }
-.class-row .name.arb{ color:var(--red); }
+.class-row .name.n-viator{ color:var(--red); }
+.class-row .name.n-illumen{ color:var(--aqua); }
+.class-row .name.n-arbiter{ color:var(--ink); }
 .class-row .role{ font-family:var(--font-mono); font-size:12px; letter-spacing:.1em; color:var(--ink-faint); text-transform:uppercase; }
 .class-row .desc{ color:var(--ink-dim); font-size:15px; }
 
@@ -215,7 +217,8 @@ section.block{ padding-block:clamp(80px,11vw,150px); position:relative; }
 .site-footer{ border-top:1px solid var(--line); background:var(--ground-2); padding-block:clamp(48px,7vw,80px); }
 .footer-top{ display:flex; justify-content:space-between; gap:40px; flex-wrap:wrap; }
 .footer-brand .mark{ font-family:var(--font-display); font-weight:700; font-size:22px; color:var(--ink); }
-.footer-brand .mark span{ color:var(--red); }
+.footer-brand .mark .fk-via{ color:var(--red); }
+.footer-brand .mark .fk-games{ color:var(--aqua); }
 .footer-brand p{ color:var(--ink-dim); max-width:40ch; margin-top:14px; font-size:15px; }
 .footer-links{ display:flex; gap:56px; flex-wrap:wrap; }
 .footer-col h5{ font-family:var(--font-mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:16px; }
@@ -391,15 +394,15 @@ section.block{ padding-block:clamp(80px,11vw,150px); position:relative; }
           <p class="field-label">The VIA Model · Operative Classes</p>
           <div class="classes">
             <div class="class-row">
-              <div><div class="name">Viator</div><div class="role">Breach &amp; Stabilize</div></div>
+              <div><div class="name n-viator">Viator</div><div class="role">Breach &amp; Stabilize</div></div>
               <div class="desc">Combat specialists. The tip of the spear into hostile dimensions.</div>
             </div>
             <div class="class-row">
-              <div><div class="name">Illumen</div><div class="role">Analyze &amp; Sequence</div></div>
+              <div><div class="name n-illumen">Illumen</div><div class="role">Analyze &amp; Sequence</div></div>
               <div class="desc">Scientists who study the Arc Dimensions and design the collapse.</div>
             </div>
             <div class="class-row">
-              <div><div class="name arb">Arbiter</div><div class="role">Oversight &amp; Enforcement</div></div>
+              <div><div class="name n-arbiter">Arbiter</div><div class="role">Oversight &amp; Enforcement</div></div>
               <div class="desc">Sent when contact is lost and other teams have failed. Your class. You finish the collapse whatever it costs.</div>
             </div>
           </div>
@@ -471,7 +474,7 @@ section.block{ padding-block:clamp(80px,11vw,150px); position:relative; }
   <div class="wrap">
     <div class="footer-top">
       <div class="footer-brand">
-        <div class="mark">Via <span>Games</span></div>
+        <div class="mark"><span class="fk-via">Via</span> <span class="fk-games">Games</span></div>
         <p>An independent game studio building ARCDROP. Made solo in New Jersey, USA.</p>
       </div>
       <div class="footer-links">
