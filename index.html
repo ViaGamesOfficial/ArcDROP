@@ -184,27 +184,6 @@ section.block{ padding-block:clamp(80px,11vw,150px); position:relative; }
 .sys-card.t3{ --accent:var(--aqua); }
 .sys-card.t4{ --accent:var(--ink); }
 
-/* ---------- ADELLINE / THE SUIT ---------- */
-.adelline-grid{ display:grid; grid-template-columns:1.05fr 1fr; gap:clamp(32px,5vw,72px); align-items:start; }
-.adelline .expand{ font-family:var(--font-mono); font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-faint); margin-top:16px; line-height:1.9; }
-.adelline .expand b{ color:var(--blush); font-weight:500; }
-.adelline .lede{ font-family:var(--font-display); font-weight:500; font-size:clamp(19px,2.1vw,24px); line-height:1.45; color:var(--ink); margin-top:26px; max-width:34ch; }
-.adelline .body p{ color:var(--ink-dim); margin-bottom:20px; max-width:52ch; }
-.adelline .body p:last-child{ margin-bottom:0; }
-.adelline .body em{ color:var(--ink); font-style:normal; }
-
-.specs{ margin-top:34px; border:1px solid var(--line); border-bottom:0; }
-.spec{ display:grid; grid-template-columns:150px 1fr; gap:20px; padding:18px 22px; border-bottom:1px solid var(--line); background:var(--surface); }
-.spec:hover{ background:var(--surface-2); }
-.spec .k{ font-family:var(--font-mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--aqua); padding-top:2px; }
-.spec .v{ color:var(--ink-dim); font-size:15px; }
-.spec .v strong{ color:var(--ink); font-weight:500; }
-.spec.warn .k{ color:var(--red); }
-@media (max-width:900px){
-  .adelline-grid{ grid-template-columns:1fr; }
-  .spec{ grid-template-columns:1fr; gap:8px; }
-}
-
 /* ---------- WORLD / DOSSIER ---------- */
 .dossier{ border:1px solid var(--line); background:linear-gradient(180deg, var(--surface) 0%, var(--ground) 100%); margin-top:56px; }
 .dossier-head{ display:flex; justify-content:space-between; align-items:center; padding:16px 26px; border-bottom:1px solid var(--line); font-family:var(--font-mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-faint); }
@@ -309,7 +288,6 @@ section.block{ padding-block:clamp(80px,11vw,150px); position:relative; }
 
   <nav class="nav" id="nav">
     <a href="#premise">Premise</a>
-    <a href="#adelline">Suit</a>
     <a href="#systems">Systems</a>
     <a href="#world">World</a>
     <a href="#status">Status</a>
@@ -353,57 +331,13 @@ section.block{ padding-block:clamp(80px,11vw,150px); position:relative; }
       </div>
       <div class="premise-body reveal">
         <p>ARCDROP is a single-player, third-person shooter roguelite set in a fracturing sci-fi universe. Unstable realities called Arc Dimensions keep splintering off the Prime Dimension, growing and mutating until they threaten to pull everything under.</p>
-        <p>Drop in, deploy your Shell, and collapse them completely. There is no exploration prize and no world worth keeping. Stick to the mission. (Or else.) Every run is a wager: how much you carry, how far past safety you push, and what you're willing to lose when it goes wrong.</p>
+        <p>Drop in, deploy your Shell, and collapse them completely. There is no exploration prize and no world worth keeping. Every run is a wager: how much you carry, how far past safety you push, and what you're willing to lose when it goes wrong.</p>
         <div class="tags">
           <span class="tag-chip">Single-player</span>
           <span class="tag-chip">Third-person shooter</span>
           <span class="tag-chip">Light Roguelite</span>
           <span class="tag-chip">Extraction loop</span>
           <span class="tag-chip">Unreal Engine 5</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="wrap"><div class="divider"></div></div>
-
-<!-- ============ ADELLINE ============ -->
-<section class="block adelline" id="adelline">
-  <div class="wrap">
-    <div class="adelline-grid">
-      <div class="reveal">
-        <span class="eyebrow">Issued equipment</span>
-        <h2 class="section-title">You wear an ADELLINE suit.</h2>
-        <p class="expand">
-          <b>A</b>rc <b>D</b>imension <b>E</b>ncapsulator with<br />
-          <b>L</b>ink <b>L</b>ayer <b>I</b>nterloping <b>N</b>eural <b>E</b>ngine
-        </p>
-        <p class="lede">Everything it does for you, it does through a link to the SHELL.</p>
-      </div>
-
-      <div class="body reveal">
-        <p>The suit does not generate anything. It is a terminal. The Link Layer is the tether that runs from the ADELLINE on your body to the SHELL on your back or anchored behind you, and every advantage you carry into an Arc Dimension crosses that tether: your recharge, your Pod effects, the read-out on your display. Nothing you own is stored in the suit. It is all borrowed, over a link, from the SHELL.</p>
-        <p>The link has a reach. Inside it, the suit recharges, the array runs, and the Arc Dimension is something you can fight. Cross the line and it all goes quiet. You keep your weapon, whatever batteries you are carrying, and whatever is in your field cache.</p>
-        <p>The Link Layer runs one way in an emergency. When an operative takes fatal damage, the ADELLINE does not extract them, it interlopes them home, tearing open a miniature black hole and pulling the wearer back down the link to the SHELL itself.</p>
-
-        <div class="specs">
-          <div class="spec">
-            <div class="k">Link Layer</div>
-            <div class="v"><strong>Suit-to-SHELL tether.</strong> Carries recharge, Pod effects, and telemetry. Holds only inside the boundary radius.</div>
-          </div>
-          <div class="spec">
-            <div class="k">Black Hole Shift</div>
-            <div class="v"><strong>Fatal-damage failsafe.</strong> Interlopes the wearer back down the link to their SHELL. While necessary, the event is detrimental to the local stability of the current dimension.</div>
-          </div>
-          <div class="spec">
-            <div class="k">Field Terminal</div>
-            <div class="v"><strong>Personal display.</strong> Field cache, Pod Array, ArcHive data, and boundary radar. Everything you need to know can be found here.</div>
-          </div>
-          <div class="spec warn">
-            <div class="k">Out of bounds</div>
-            <div class="v"><strong>Link suspended.</strong> No recharge. No Pod effects. Past this line you are running on skill and whatever is already in your hands.</div>
-          </div>
         </div>
       </div>
     </div>
@@ -426,10 +360,11 @@ section.block{ padding-block:clamp(80px,11vw,150px); position:relative; }
         <span class="bar"></span>
         <span class="idx">SYS_01</span>
         <h3>SHELL <span class="sys-sub">Spatial Hybrid Enclave with Link Layer</span></h3>
-        <p class="sys-lead">It starts with the SHELL, the base you wear on your back. The other end of your <a href="#adelline">ADELLINE's Link Layer</a>.</p>
+        <p class="sys-lead">It starts with the SHELL, the base you wear on your back.</p>
         <div class="sys-more" id="more-01"><div class="sys-more-inner">
-          <p>Equip it with different ability-granting Pods. Anchor it at a Gravity Well and the Link Layer projects their effects across the world to a set boundary; step past that limit and the tether drops, and the buffs cut out with it. Take fatal damage and the ADELLINE tears open a miniature black hole and pulls you back down the link to your SHELL, safely. That Black Hole Shift is your respawn.</p>
-          <p>Forgo anchoring your SHELL and wear it deep into the field. Your Pods' effects now travel with you, always active. In this state, if an Operative kills you, they can haul your Shell to a well and deploy it themselves. Respawning now sets you inside an invasion of your own Shell. Win and keep everything. Your Pods and reserves are at stake if you lose.</p>
+          <p>Spatial Hybrid is not a name, it is a state. Gravitationally condensed, the SHELL rides as a backpack-sized marvel of technology. Let it expand and the same enclave unfolds into a full-scale interdimensional vehicle. One object, worn or deployed, depending on what the drop asks of you.</p>
+          <p>Equip it with different ability-granting modules and anchor it at a Gravity Well. From there its Link Layer projects those effects across the world out to a set boundary; step past that limit and the tether drops, and the buffs cut out with it. Take fatal damage inside the boundary and the SHELL snaps you back down the Link Layer to itself, safely. That Black Hole Shift is your respawn.</p>
+          <p>Forgo anchoring your SHELL and wear it deep into the field. Its module effects now travel with you, always active. In this state, if an Operative kills you, they can haul your SHELL to a Well and deploy it themselves. Respawning now sets you inside an invasion of your own SHELL. Win and keep everything. Everything you carry is at stake if you lose.</p>
         </div></div>
         <button class="sys-toggle" aria-expanded="false" aria-controls="more-01"><span class="sys-toggle-label">Read more</span><span class="sys-toggle-icon" aria-hidden="true"></span></button>
       </article>
@@ -437,10 +372,11 @@ section.block{ padding-block:clamp(80px,11vw,150px); position:relative; }
       <article class="sys-card t2">
         <span class="bar"></span>
         <span class="idx">SYS_02</span>
-        <h3>Pods</h3>
-        <p class="sys-lead">You earn every Pod you slot into it.</p>
+        <h3>ADELLINE <span class="sys-sub">Arc Dimension Encapsulator · Link Layer Interloping Neural Engine</span></h3>
+        <p class="sys-lead">The suit you wear is a terminal into your SHELL.</p>
         <div class="sys-more" id="more-02"><div class="sys-more-inner">
-          <p>Pods are the modules that ride on your Shell's exterior array. Find them out in the field, sometimes on the SHELLs of other Operatives. Reverse-engineer any Pod you're carrying to learn its blueprint permanently. Fabricating from a blueprint costs different resources. Gather them out in the field to fill your Field Cache. Bank the haul by returning to your Shell. Find rare SSRs (Short Signal Relays) to extract resources straight from the field.</p>
+          <p>The ADELLINE generates nothing of its own. It is the wearer's end of the SHELL's Link Layer, and every advantage you carry into an Arc Dimension crosses that tether: your recharge, your equipped effects, the read-out on your display. Inside the boundary the suit runs and the dimension is something you can fight. Cross the line and the link goes quiet, leaving you with your weapon and whatever is already in your hands.</p>
+          <p>The Black Hole Shift is the ADELLINE running the Link Layer one way. On fatal damage the suit does not extract you to a default point, it interlopes you home, tearing open a miniature black hole and pulling you back down the link to the SHELL itself. Your respawn is your base, because the suit was never anything more than the far end of it.</p>
         </div></div>
         <button class="sys-toggle" aria-expanded="false" aria-controls="more-02"><span class="sys-toggle-label">Read more</span><span class="sys-toggle-icon" aria-hidden="true"></span></button>
       </article>
@@ -448,10 +384,11 @@ section.block{ padding-block:clamp(80px,11vw,150px); position:relative; }
       <article class="sys-card t3">
         <span class="bar"></span>
         <span class="idx">SYS_03</span>
-        <h3>Builds</h3>
-        <p class="sys-lead">Push through changing terrain on a route only your build can take.</p>
+        <h3>Pods &amp; Builds</h3>
+        <p class="sys-lead">The modules you earn, and the run they turn into.</p>
         <div class="sys-more" id="more-03"><div class="sys-more-inner">
-          <p>Your build is a route. A traversal Pod walks you off a ledge that stops an unequipped Operative dead &mdash; the same drop is a wall for one Arbiter and a shortcut for the next. Some builds turn the dimension's hostility into an asset, converting incoming damage into energy or shrugging off hazards that end other runs. Others decide how you fight, or whether you fight at all: silence your footsteps and slip through what a louder build would have to kill. Commit to your Pods before you drop, because they don't just make you stronger. They decide which version of the dimension you're playing.</p>
+          <p>Pods are the modules that ride on your SHELL's exterior array &mdash; the ability-granting effects your Link Layer projects. Find them out in the field, sometimes on the SHELLs of other Operatives. Reverse-engineer any Pod you're carrying to learn its blueprint permanently, then fabricate from that blueprint for a cost in resources. Gather those resources to fill your Field Cache, and bank the haul by returning to your SHELL. Rare SSRs (Short Signal Relays) let you extract resources straight from the field.</p>
+          <p>Your build is which Pods you commit to, and that build is a route. A traversal Pod walks you off a ledge that stops an unequipped Operative dead &mdash; the same drop is a wall for one Arbiter and a shortcut for the next. Some builds turn the dimension's hostility into an asset, converting incoming damage into energy or shrugging off hazards that end other runs. Others decide how you fight, or whether you fight at all: silence your footsteps and slip through what a louder build would have to kill. Commit before you drop, because your Pods don't just make you stronger. They decide which version of the dimension you're playing.</p>
         </div></div>
         <button class="sys-toggle" aria-expanded="false" aria-controls="more-03"><span class="sys-toggle-label">Read more</span><span class="sys-toggle-icon" aria-hidden="true"></span></button>
       </article>
@@ -492,7 +429,7 @@ section.block{ padding-block:clamp(80px,11vw,150px); position:relative; }
           <p>The Nonlinear Operatives Command is a shadow division under an unnamed global initiative. Its mission is to stabilize the Prime Dimension by collapsing the offshoots, and it works in total secrecy.</p>
 
           <p class="field-label">In-world technology &middot; ADELLINE</p>
-          <p>The Arc Dimension Encapsulator with Link Layer Interloping Neural Engine. NLOC issues one to every operative it sends across. The suit holds nothing of its own; its Link Layer tethers the wearer to a SHELL, and every recharge, Pod effect, and read-out is drawn down that tether. Sever the link and the operative is just a person standing in a dying reality. <a href="#adelline">Full specification &rarr;</a></p>
+          <p>The Arc Dimension Encapsulator with Link Layer Interloping Neural Engine. NLOC issues one to every operative it sends across. The suit holds nothing of its own; its Link Layer tethers the wearer to a SHELL, and every recharge, effect, and read-out is drawn down that tether. Sever the link and the operative is just a person standing in a dying reality. <a href="#systems">See field systems &rarr;</a></p>
         </div>
         <div>
           <p class="field-label">The VIA Model · Operative Classes</p>
@@ -554,20 +491,19 @@ section.block{ padding-block:clamp(80px,11vw,150px); position:relative; }
 <section class="block follow" id="follow">
   <div class="wrap">
     <div class="reveal">
-      <span class="eyebrow" style="justify-content:center;">Remember why you DROP.</span>
+      <span class="eyebrow" style="justify-content:center;">"Remember why you DROP."</span>
       <h2 class="section-title" style="margin-inline:auto;">Stay informed...</h2>
       <p class="section-lead">Playtest invites, build notes, and the Next Fest demo go out through these channels first.</p>
 
       <div class="follow-cta-row">
         <a href="https://discord.gg/SegRcWahHf" target="_blank" rel="noopener" class="btn btn-primary">Join the Via Games Discord</a>
         <span class="btn btn-ghost is-soon" aria-disabled="true">Wishlist on Steam <span class="tag">coming soon</span></span>
-         <a href="https://www.youtube.com/@ViaGames_Official" target="_blank" rel="noopener" class="channel">YouTube</a>
-        <a href="mailto:Polidoro@Via-Games.com" class="channel">Email</a>
       </div>
 
       <div class="channels">
-        
-        
+        <a href="https://discord.gg/SegRcWahHf" target="_blank" rel="noopener" class="channel">Discord</a>
+        <a href="https://www.youtube.com/@ViaGames_Official" target="_blank" rel="noopener" class="channel">YouTube</a>
+        <a href="mailto:Polidoro@Via-Games.com" class="channel">Email</a>
       </div>
     </div>
   </div>
@@ -586,7 +522,6 @@ section.block{ padding-block:clamp(80px,11vw,150px); position:relative; }
         <div class="footer-col">
           <h5>ARCDROP</h5>
           <a href="#premise">Premise</a>
-          <a href="#adelline">Suit</a>
           <a href="#systems">Systems</a>
           <a href="#world">World</a>
           <a href="#status">Roadmap</a>
