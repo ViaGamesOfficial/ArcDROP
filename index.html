@@ -184,6 +184,27 @@ section.block{ padding-block:clamp(80px,11vw,150px); position:relative; }
 .sys-card.t3{ --accent:var(--aqua); }
 .sys-card.t4{ --accent:var(--ink); }
 
+/* ---------- ADELLINE / THE SUIT ---------- */
+.adelline-grid{ display:grid; grid-template-columns:1.05fr 1fr; gap:clamp(32px,5vw,72px); align-items:start; }
+.adelline .expand{ font-family:var(--font-mono); font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-faint); margin-top:16px; line-height:1.9; }
+.adelline .expand b{ color:var(--blush); font-weight:500; }
+.adelline .lede{ font-family:var(--font-display); font-weight:500; font-size:clamp(19px,2.1vw,24px); line-height:1.45; color:var(--ink); margin-top:26px; max-width:34ch; }
+.adelline .body p{ color:var(--ink-dim); margin-bottom:20px; max-width:52ch; }
+.adelline .body p:last-child{ margin-bottom:0; }
+.adelline .body em{ color:var(--ink); font-style:normal; }
+
+.specs{ margin-top:34px; border:1px solid var(--line); border-bottom:0; }
+.spec{ display:grid; grid-template-columns:150px 1fr; gap:20px; padding:18px 22px; border-bottom:1px solid var(--line); background:var(--surface); }
+.spec:hover{ background:var(--surface-2); }
+.spec .k{ font-family:var(--font-mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--aqua); padding-top:2px; }
+.spec .v{ color:var(--ink-dim); font-size:15px; }
+.spec .v strong{ color:var(--ink); font-weight:500; }
+.spec.warn .k{ color:var(--red); }
+@media (max-width:900px){
+  .adelline-grid{ grid-template-columns:1fr; }
+  .spec{ grid-template-columns:1fr; gap:8px; }
+}
+
 /* ---------- WORLD / DOSSIER ---------- */
 .dossier{ border:1px solid var(--line); background:linear-gradient(180deg, var(--surface) 0%, var(--ground) 100%); margin-top:56px; }
 .dossier-head{ display:flex; justify-content:space-between; align-items:center; padding:16px 26px; border-bottom:1px solid var(--line); font-family:var(--font-mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-faint); }
@@ -288,6 +309,7 @@ section.block{ padding-block:clamp(80px,11vw,150px); position:relative; }
 
   <nav class="nav" id="nav">
     <a href="#premise">Premise</a>
+    <a href="#adelline">Suit</a>
     <a href="#systems">Systems</a>
     <a href="#world">World</a>
     <a href="#status">Status</a>
@@ -346,6 +368,50 @@ section.block{ padding-block:clamp(80px,11vw,150px); position:relative; }
 
 <div class="wrap"><div class="divider"></div></div>
 
+<!-- ============ ADELLINE ============ -->
+<section class="block adelline" id="adelline">
+  <div class="wrap">
+    <div class="adelline-grid">
+      <div class="reveal">
+        <span class="eyebrow">Issued equipment</span>
+        <h2 class="section-title">You wear an ADELLINE suit.</h2>
+        <p class="expand">
+          <b>A</b>rc <b>D</b>imension <b>E</b>ncapsulator with<br />
+          <b>L</b>ink <b>L</b>ayer <b>I</b>nterloping <b>N</b>eural <b>E</b>ngine
+        </p>
+        <p class="lede">Everything it does for you, it does through a link to the SHELL.</p>
+      </div>
+
+      <div class="body reveal">
+        <p>The suit does not generate anything. It is a terminal. The Link Layer is the tether that runs from the ADELLINE on your body to the SHELL on your back or anchored behind you, and every advantage you carry into an Arc Dimension crosses that tether: your recharge, your Pod effects, the read-out on your display. Nothing you own is stored in the suit. It is all borrowed, over a link, from the SHELL.</p>
+        <p>The link has a reach. Inside it, the suit recharges, the array runs, and the Arc Dimension is something you can fight. Cross the line and it all goes quiet. You keep your weapon, whatever batteries you are carrying, and whatever is in your field cache. <em>That is the whole game.</em></p>
+        <p>The Link Layer runs one way in an emergency. When an operative takes fatal damage, the ADELLINE does not extract them, it interlopes them home, tearing open a miniature black hole and pulling the wearer back down the link to the SHELL itself.</p>
+
+        <div class="specs">
+          <div class="spec">
+            <div class="k">Link Layer</div>
+            <div class="v"><strong>Suit-to-SHELL tether.</strong> Carries recharge, Pod effects, and telemetry. Holds only inside the boundary radius.</div>
+          </div>
+          <div class="spec">
+            <div class="k">Black Hole Shift</div>
+            <div class="v"><strong>Fatal-damage failsafe.</strong> Interlopes the wearer back down the link to their SHELL instead of a default extraction point. Your respawn is your base.</div>
+          </div>
+          <div class="spec">
+            <div class="k">Field Terminal</div>
+            <div class="v"><strong>Internal display.</strong> Field cache, Pod Array, fabrication, and boundary radar. In the field or inside the SHELL, you are always reading the ADELLINE.</div>
+          </div>
+          <div class="spec warn">
+            <div class="k">Out of bounds</div>
+            <div class="v"><strong>Link suspended.</strong> No recharge. No Pod effects. Past the line you are running on skill and whatever is already in your hands.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="divider"></div></div>
+
 <!-- ============ SYSTEMS ============ -->
 <section class="block systems" id="systems">
   <div class="wrap">
@@ -360,9 +426,9 @@ section.block{ padding-block:clamp(80px,11vw,150px); position:relative; }
         <span class="bar"></span>
         <span class="idx">SYS_01</span>
         <h3>SHELL <span class="sys-sub">Spatial Hybrid Enclave with Link Layer</span></h3>
-        <p class="sys-lead">It starts with the SHELL, the base you wear on your back.</p>
+        <p class="sys-lead">It starts with the SHELL, the base you wear on your back. The other end of your <a href="#adelline">ADELLINE's Link Layer</a>.</p>
         <div class="sys-more" id="more-01"><div class="sys-more-inner">
-          <p>Equip it with different ability-granting Pods. Anchor it at a Gravity Well and its Pods project their effects across the world to a set boundary; step past that limit and the buffs cut out. Take fatal damage and your suit tears open a miniature black hole that warps you back to your SHELL, safely. That Black Hole Shift is your respawn.</p>
+          <p>Equip it with different ability-granting Pods. Anchor it at a Gravity Well and the Link Layer projects their effects across the world to a set boundary; step past that limit and the tether drops, and the buffs cut out with it. Take fatal damage and the ADELLINE tears open a miniature black hole and pulls you back down the link to your SHELL, safely. That Black Hole Shift is your respawn.</p>
           <p>Forgo anchoring your SHELL and wear it deep into the field. Your Pods' effects now travel with you, always active. In this state, if an Operative kills you, they can haul your Shell to a well and deploy it themselves. Respawning now sets you inside an invasion of your own Shell. Win and keep everything. Your Pods and reserves are at stake if you lose.</p>
         </div></div>
         <button class="sys-toggle" aria-expanded="false" aria-controls="more-01"><span class="sys-toggle-label">Read more</span><span class="sys-toggle-icon" aria-hidden="true"></span></button>
@@ -424,6 +490,9 @@ section.block{ padding-block:clamp(80px,11vw,150px); position:relative; }
 
           <p class="field-label">The NLOC</p>
           <p>The Nonlinear Operatives Command is a shadow division under an unnamed global initiative. Its mission is to stabilize the Prime Dimension by collapsing the offshoots, and it works in total secrecy.</p>
+
+          <p class="field-label">In-world technology &middot; ADELLINE</p>
+          <p>The Arc Dimension Encapsulator with Link Layer Interloping Neural Engine. NLOC issues one to every operative it sends across. The suit holds nothing of its own; its Link Layer tethers the wearer to a SHELL, and every recharge, Pod effect, and read-out is drawn down that tether. Sever the link and the operative is just a person standing in a dying reality. <a href="#adelline">Full specification &rarr;</a></p>
         </div>
         <div>
           <p class="field-label">The VIA Model · Operative Classes</p>
@@ -516,6 +585,7 @@ section.block{ padding-block:clamp(80px,11vw,150px); position:relative; }
         <div class="footer-col">
           <h5>ARCDROP</h5>
           <a href="#premise">Premise</a>
+          <a href="#adelline">Suit</a>
           <a href="#systems">Systems</a>
           <a href="#world">World</a>
           <a href="#status">Roadmap</a>
