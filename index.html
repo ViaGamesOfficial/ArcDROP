@@ -222,6 +222,21 @@ section.block{ padding-block:clamp(80px,11vw,150px); position:relative; }
 .status-badge .dot{ width:8px; height:8px; border-radius:50%; background:var(--aqua); animation:pulse 2s ease-in-out infinite; }
 @keyframes pulse{ 0%,100%{ opacity:1; } 50%{ opacity:.3; } }
 
+/* ---------- CREDITS / CONTRIBUTORS ---------- */
+.credits .credits-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); margin-top:56px; border:1px solid var(--line); }
+.credits .cx-card{ background:var(--surface); padding:clamp(28px,3.5vw,44px); position:relative; }
+.credits .cx-card .bar{ position:absolute; left:0; top:0; bottom:0; width:3px; }
+.credits .cx-card.c1 .bar{ background:var(--aqua); }
+.credits .cx-card.c2 .bar{ background:var(--red); }
+.credits .cx-card h3{ font-family:var(--font-display); font-weight:600; font-size:clamp(20px,2.2vw,26px); margin:8px 0 14px; color:var(--ink); }
+.credits .cx-card p{ color:var(--ink-dim); max-width:46ch; }
+.credits .cx-card p + p{ margin-top:14px; }
+.credits .cx-card p .accent{ color:var(--ink); font-weight:500; }
+.credits .credit-note{ font-family:var(--font-mono); font-size:12px; letter-spacing:.06em; color:var(--aqua); margin-top:16px; display:inline-flex; align-items:flex-start; gap:10px; }
+.credits .credit-note::before{ content:""; width:16px; height:1px; background:var(--aqua); margin-top:9px; flex:0 0 auto; }
+.credits .credit-cta{ margin-top:44px; }
+@media (max-width:900px){ .credits .credits-grid{ grid-template-columns:1fr; } }
+
 /* ---------- FOLLOW ---------- */
 .follow{ text-align:center; }
 .follow .section-lead{ margin-inline:auto; }
@@ -292,6 +307,7 @@ section.block{ padding-block:clamp(80px,11vw,150px); position:relative; }
     <a href="#systems">Systems</a>
     <a href="#world">World</a>
     <a href="#status">Status</a>
+    <a href="#credits">Credits</a>
     <a href="https://discord.gg/SegRcWahHf" target="_blank" rel="noopener" class="nav-cta">Join the Via Games Discord</a>
   </nav>
 </header>
@@ -310,7 +326,7 @@ section.block{ padding-block:clamp(80px,11vw,150px); position:relative; }
 
     <blockquote class="hero-quote">
       <p>"The price of stability is the eradication of possibility."</p>
-      <cite>—Dr. Isac Vance, Sole Illumine of the First Collapse</cite>
+      <cite>Dr. Isac Vance, Sole Illumine of the First Collapse</cite>
     </blockquote>
 
     <div class="cta-row">
@@ -361,9 +377,9 @@ section.block{ padding-block:clamp(80px,11vw,150px); position:relative; }
         <h3>SHELL <span class="sys-sub">Spatial Hybrid Enclave with Link Layer</span></h3>
         <p class="sys-lead">It starts with the SHELL, the base you wear on your back.</p>
         <div class="sys-more" id="more-01"><div class="sys-more-inner">
-          <p>Spatial Hybrid is newly explored state of being. Gravitationally condensed, the SHELL rides as a backpack-sized marvel of technology. Let it expand and the same enclave unfolds into a full-scale interdimensional vehicle.</p>
+          <p>Spatial Hybrid is a new technological marvel built on gravitational manipulation. Held in a gravitationally condensed state, the SHELL rides as a backpack-sized piece of equipment. Let it expand and the same enclave unfolds into a full-scale interdimensional vehicle.</p>
           <p>Equip it with different ability-granting modules and anchor it at a Gravity Well. From there its Link Layer projects those effects across the world out to a set boundary; step past that limit and the tether drops, and the buffs cut out with it. Take fatal damage inside the boundary and the SHELL snaps you back down the Link Layer to itself, safely. That Black Hole Shift is your respawn.</p>
-          <p>Forgo anchoring your SHELL and wear it deep into the field. Its module effects now travel with you, always active. In this state, if a rogue Operative &mdash; an AI adversary &mdash; kills you, they can haul your SHELL to a Well and deploy it themselves. Respawning now sets you inside an invasion of your own SHELL. Win and keep everything. Everything you carry is at stake if you lose.</p>
+          <p>Forgo anchoring your SHELL and wear it deep into the field. Its module effects now travel with you, always active. In this state, if a rogue Operative (an AI adversary) kills you, they can haul your SHELL to a Well and deploy it themselves. Respawning now sets you inside an invasion of your own SHELL. Win and keep everything. Everything you carry is at stake if you lose.</p>
         </div></div>
         <button class="sys-toggle" aria-expanded="false" aria-controls="more-01"><span class="sys-toggle-label">Read more</span><span class="sys-toggle-icon" aria-hidden="true"></span></button>
       </article>
@@ -386,8 +402,8 @@ section.block{ padding-block:clamp(80px,11vw,150px); position:relative; }
         <h3>Pods &amp; Builds</h3>
         <p class="sys-lead">The modules you earn, and the run they turn into.</p>
         <div class="sys-more" id="more-03"><div class="sys-more-inner">
-          <p>Pods are the modules that ride on your SHELL's exterior array &mdash; the ability-granting effects your Link Layer projects. Find them out in the field, sometimes on the SHELLs of other Operatives. Reverse-engineer any Pod you're carrying to learn its blueprint permanently, then fabricate from that blueprint for a cost in resources. Gather those resources to fill your Field Cache, and bank the haul by returning to your SHELL. Rare SSRs (Short Signal Relays) let you extract resources straight from the field.</p>
-          <p>Your build is which Pods you commit to, and that build is a route. A traversal Pod walks you off a ledge that stops an unequipped Operative dead. The same drop is a wall for one Arbiter and a shortcut for the next. Some builds turn the dimension's hostility into an asset, converting incoming damage into energy or shrugging off hazards that end other runs. Others decide how you fight, or whether you fight at all: silence your footsteps and slip through what a louder build would have to kill. Commit before you drop, because your Pods don't just make you stronger. They decide which version of the dimension you're playing.</p>
+          <p>Pods are the modules that ride on your SHELL's exterior array, the ability-granting effects your Link Layer projects. Find them out in the field, sometimes on the SHELLs of other Operatives. Reverse-engineer any Pod you're carrying to learn its blueprint permanently, then fabricate from that blueprint for a cost in resources. Gather those resources to fill your Field Cache, and bank the haul by returning to your SHELL. Rare SSRs (Short Signal Relays) let you extract resources straight from the field.</p>
+          <p>Your build is which Pods you commit to, and that build is a route. A traversal Pod walks you off a ledge that stops an unequipped Operative dead. The same drop is a wall for one Arbiter and a shortcut for the next. Some builds turn the dimension's hostility into an asset, converting incoming damage into energy or shrugging off hazards that end other runs. Others decide how you fight, or whether you fight at all: silence your footsteps and slip through what a louder build would have to kill. Commit before you drop, because your Pods decide which version of the dimension you're playing.</p>
         </div></div>
         <button class="sys-toggle" aria-expanded="false" aria-controls="more-03"><span class="sys-toggle-label">Read more</span><span class="sys-toggle-icon" aria-hidden="true"></span></button>
       </article>
@@ -483,6 +499,39 @@ section.block{ padding-block:clamp(80px,11vw,150px); position:relative; }
   </div>
 </section>
 
+<div class="wrap"><div class="divider"></div></div>
+
+<!-- ============ CREDITS ============ -->
+<section class="block credits" id="credits">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">Field manifest</span>
+      <h2 class="section-title">Built by one. Shaped by many.</h2>
+      <p class="section-lead">ARCDROP is a solo project under Via Games, but plenty of hands have helped move it forward.</p>
+    </div>
+
+    <div class="credits-grid reveal">
+      <article class="cx-card c1">
+        <span class="bar"></span>
+        <h3>One operative on the ground</h3>
+        <p>The engine work, the SHELL, the Pod Array, the suit stats, the world. All of it is built and maintained by a single developer.</p>
+        <p>No build ships in a vacuum, though. Every playtest, bug report, asset, fix, and late-night piece of advice leaves a mark on ARCDROP, and those marks are what turn a build into something worth dropping into.</p>
+      </article>
+
+      <article class="cx-card c2">
+        <span class="bar"></span>
+        <h3>Credited in the field</h3>
+        <p><span class="accent">Anyone who contributes to ARCDROP in any capacity earns a credit in the finished game.</span> Code, art, audio, testing, feedback, a fix that unblocked a hard problem. If you helped move ARCDROP forward, your name ships with it.</p>
+        <p>The Via Games Discord is where that work happens: playtest calls, build notes, and the conversations that shape what gets built next.</p>
+      </article>
+    </div>
+
+    <div class="credit-cta reveal">
+      <a href="https://discord.gg/SegRcWahHf" target="_blank" rel="noopener" class="btn btn-primary">Get involved on Discord</a>
+    </div>
+  </div>
+</section>
+
 <!-- ============ FOLLOW ============ -->
 <section class="block follow" id="follow">
   <div class="wrap">
@@ -517,6 +566,7 @@ section.block{ padding-block:clamp(80px,11vw,150px); position:relative; }
           <a href="#systems">Systems</a>
           <a href="#world">World</a>
           <a href="#status">Roadmap</a>
+          <a href="#credits">Credits</a>
         </div>
         <div class="footer-col">
           <h5>Follow</h5>
