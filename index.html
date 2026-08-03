@@ -184,6 +184,32 @@ section.block{ padding-block:clamp(80px,11vw,150px); position:relative; }
 .sys-card.t3{ --accent:var(--aqua); }
 .sys-card.t4{ --accent:var(--ink); }
 
+/* ---------- BUILDS / TEST PLAYS ---------- */
+.builds .build-note{ display:grid; grid-template-columns:1.1fr .9fr; gap:64px; align-items:start; margin-top:44px; }
+.builds .build-log p{ color:var(--ink-dim); margin-bottom:18px; max-width:56ch; }
+.builds .build-log p strong{ color:var(--ink); font-weight:600; }
+.builds .build-log .trademark-line{ border-left:2px solid var(--aqua); padding-left:20px; color:var(--ink-dim); font-size:15px; }
+.build-card{ border:1px solid var(--line); background:linear-gradient(180deg, var(--surface) 0%, var(--ground) 100%); }
+.build-card .build-head{ display:flex; justify-content:space-between; align-items:center; padding:16px 24px; border-bottom:1px solid var(--line); font-family:var(--font-mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-faint); }
+.build-card .build-head .stamp{ color:var(--aqua); border:1px solid var(--aqua); padding:3px 10px; letter-spacing:.18em; }
+.build-shot{ display:block; width:100%; height:auto; border-bottom:1px solid var(--line); }
+.build-card .build-body{ padding:clamp(22px,3vw,32px); }
+.build-card h3{ font-family:var(--font-display); font-weight:600; font-size:clamp(20px,2.2vw,26px); color:var(--ink); margin-bottom:6px; }
+.build-card .build-sub{ font-family:var(--font-mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:20px; }
+.build-feats{ display:grid; gap:12px; margin:0 0 24px; }
+.build-feat{ display:flex; gap:12px; align-items:flex-start; color:var(--ink-dim); font-size:15px; }
+.build-feat::before{ content:""; flex:0 0 auto; width:6px; height:6px; margin-top:8px; background:var(--red); border-radius:50%; }
+.build-embed{ margin-top:22px; border:1px solid var(--line); }
+.build-embed iframe{ display:block; width:100%; }
+.metrics-callout{ margin-top:36px; border:1px solid var(--line-strong); background:var(--surface); padding:clamp(22px,3vw,32px); position:relative; }
+.metrics-callout::before{ content:""; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--aqua); }
+.metrics-callout .field-label{ font-family:var(--font-mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--aqua); margin-bottom:12px; }
+.metrics-callout p{ color:var(--ink-dim); max-width:60ch; margin-bottom:14px; }
+.metrics-callout p:last-child{ margin-bottom:0; }
+.metrics-callout code{ font-family:var(--font-mono); font-size:13px; color:var(--ink); background:var(--ground-2); padding:2px 7px; border:1px solid var(--line); }
+.metrics-callout .metrics-cta{ margin-top:22px; }
+@media (max-width:900px){ .builds .build-note{ grid-template-columns:1fr; gap:40px; } }
+
 /* ---------- WORLD / DOSSIER ---------- */
 .dossier{ border:1px solid var(--line); background:linear-gradient(180deg, var(--surface) 0%, var(--ground) 100%); margin-top:56px; }
 .dossier-head{ display:flex; justify-content:space-between; align-items:center; padding:16px 26px; border-bottom:1px solid var(--line); font-family:var(--font-mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-faint); }
@@ -305,6 +331,7 @@ section.block{ padding-block:clamp(80px,11vw,150px); position:relative; }
   <nav class="nav" id="nav">
     <a href="#premise">Premise</a>
     <a href="#systems">Systems</a>
+    <a href="#builds">Testplay</a>
     <a href="#world">World</a>
     <a href="#status">Status</a>
     <a href="credits.html">Credits</a>
@@ -418,6 +445,63 @@ section.block{ padding-block:clamp(80px,11vw,150px); position:relative; }
         </div></div>
         <button class="sys-toggle" aria-expanded="false" aria-controls="more-04"><span class="sys-toggle-label">Read more</span><span class="sys-toggle-icon" aria-hidden="true"></span></button>
       </article>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="divider"></div></div>
+
+<!-- ============ BUILDS / TEST PLAYS ============ -->
+<section class="block builds" id="builds">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">Testplay</span>
+      <h2 class="section-title">Back from the quiet with a new stress test.</h2>
+    </div>
+
+    <div class="build-note">
+      <div class="build-log reveal">
+        <p>It's been a while since I've put out any news, so here's where things stand. On the legal side, <strong>the deadline passed for Embark Studios to request another extension of time to oppose the ARCDROP trademark.</strong> I haven't heard anything back yet, and I'm choosing to read that as good news. From here it's just a matter of waiting out however long the delay is before I find out what the actual decision was.</p>
+        <p class="trademark-line">No news on the mark since the extension window closed. Waiting on the ruling.</p>
+        <p>Meanwhile, development kept moving, and there's a fresh build to break. This one's a <strong>stress test</strong>. No intros this time, you drop straight in. It's not the same environment as before, just a similar one: small and empty. What's new is <strong>better lasers</strong> and a <strong>working day/night cycle</strong>, sped up well past real time for demonstration and to push the renderer harder.</p>
+        <p>Poke around, shoot things, watch the light change. The point is to load the systems up and see where they strain.</p>
+      </div>
+
+      <div class="build-card reveal">
+        <div class="build-head">
+          <span>Via Games // Test Build</span>
+          <span class="stamp">Stress Test</span>
+        </div>
+        <img class="build-shot" src="assets/build2img.png" alt="ARCDROP Stress Test 02 gameplay: an operative firing a laser weapon at a hovering orb in a rain-soaked, gold-lit test chamber." loading="lazy" />
+        <div class="build-body">
+          <h3>ARCDROP Stress Test 02</h3>
+          <div class="build-sub">Small area · No intro · Windows</div>
+          <div class="build-feats">
+            <div class="build-feat">Reworked laser weaponry with improved visuals and behavior.</div>
+            <div class="build-feat">Working day/night cycle, accelerated for demo and stress purposes.</div>
+            <div class="build-feat">A similar small, empty test area. Drop in and go.</div>
+          </div>
+          <div class="build-embed">
+            <iframe frameborder="0" src="https://itch.io/embed/4839811?bg_color=0c1621&amp;fg_color=debb7d&amp;link_color=193d3f" width="552" height="167"><a href="https://viagamesofficial.itch.io/arcdrop">ArcDROP by Via Games</a></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="metrics-callout reveal">
+      <p class="field-label">Inventory preview</p>
+      <p>There's an in-progress inventory system included in this build. Press <code>I</code> to open it. <code>Enter</code> toggles between your SHELL Anchored and Compact, and you can only change equipped PODS while it is Compact.</p>
+      <p>Some aspects work and some don't. It's only a work-in-progress preview. A full inventory and equipment system will be the focus of the next build.</p>
+    </div>
+
+    <div class="metrics-callout reveal">
+      <p class="field-label">After you play, the metrics file</p>
+      <p>After each playthrough, ARCDROP writes a metrics text file to your <strong style="color:var(--ink);">desktop</strong>. Feel free to open it and look it over, it holds some information about how your system handled the build.</p>
+      <p>If you're willing to send it my way, it's genuinely helpful. You can email the <code>ArcDROPMetrics.txt</code> text file directly, or, if you'd rather not send a file, just copy and paste the text into an email instead. Whatever you're comfortable with.</p>
+      <div class="metrics-cta">
+        <a href="mailto:Polidoro@Via-Games.com?subject=ArcDROPMetrics.txt" class="btn btn-primary">Email the metrics file</a>
+        <a href="https://discord.gg/SegRcWahHf" target="_blank" rel="noopener" class="btn btn-ghost">Report on Discord</a>
+      </div>
     </div>
   </div>
 </section>
@@ -542,7 +626,8 @@ section.block{ padding-block:clamp(80px,11vw,150px); position:relative; }
       <p class="section-lead">Playtest invites, build notes, and the Next Fest demo go out through these channels first.</p>
 
       <div class="follow-cta-row">
-        <a href="https://discord.gg/SegRcWahHf" target="_blank" rel="noopener" class="btn btn-primary">Join the Via Games Discord</a>
+        <a href="#builds" class="btn btn-primary">Play the latest Testplay</a>
+        <a href="https://discord.gg/SegRcWahHf" target="_blank" rel="noopener" class="btn btn-ghost">Join the Via Games Discord</a>
         <span class="btn btn-ghost is-soon" aria-disabled="true">Wishlist on Steam <span class="tag">coming soon</span></span>
         <a href="https://www.youtube.com/@ViaGames_Official" target="_blank" rel="noopener" class="channel">YouTube</a>
         <a href="mailto:Polidoro@Via-Games.com" class="channel">Email</a>
@@ -565,6 +650,7 @@ section.block{ padding-block:clamp(80px,11vw,150px); position:relative; }
           <h5>ARCDROP</h5>
           <a href="#premise">Premise</a>
           <a href="#systems">Systems</a>
+          <a href="#builds">Testplay</a>
           <a href="#world">World</a>
           <a href="#status">Roadmap</a>
           <a href="credits.html">Credits</a>
