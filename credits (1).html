@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Via Games  |  ARCDROP® </title>
+<meta name="description" content="ARCDROP is a single-player sci-fi third-person shooter roguelite. You are an Arbiter of the NLOC, dropped in to collapse unstable realities before they drag the Prime Dimension under. In development by Via Games." />
+<link rel="canonical" href="https://www.via-games.com/" />
+
+<meta property="og:title" content="Via Games  |  ARCDROP®" />
+<meta property="og:description" content="You are an Arbiter. Force the erasure of unstable realities before they drag the Prime Dimension into annihilation. A single-player shooter roguelite by Via Games." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://www.via-games.com/" />
+<meta property="og:image" content="https://www.via-games.com/arcdrop_capsule.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+<style>
+
+/* ===========================================================
+   ARCDROP // Via Games LLC  //  SIGNAL THEME
+   Colors sampled directly from the ARCDROP logo:
+   Ground #0E121A   Red #E8354B (ARC)   Aqua #90D6D8 (DROP)
+   Blush #D58F79 (the warm midpoint)    Ink #E7ECF1
+   Red and aqua are the two poles; blush connects them.
+   =========================================================== */
+
+:root{
+  --ground:     #0E121A;
+  --ground-2:   #090C12;
+  --surface:    #141A24;
+  --surface-2:  #1B2431;
+
+  --ink:        #E7ECF1;
+  --ink-dim:    #9BA7B4;
+  --ink-faint:  #69747F;
+
+  --line:       rgba(231,236,241,.10);
+  --line-strong:rgba(231,236,241,.17);
+
+  --red:        #E8354B;
+  --red-bright: #F44D62;
+  --aqua:       #90D6D8;
+  --aqua-deep:  #5FB6B9;
+  --blush:      #D58F79;
+
+  --font-display: "Chakra Petch", system-ui, sans-serif;
+  --font-body:    "Inter", system-ui, sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, monospace;
+
+  --wrap: 1160px;
+  --pad: clamp(20px, 5vw, 64px);
+}
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+html{ scroll-behavior:smooth; }
+
+body{
+  background:var(--ground);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-size:17px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+body::after{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:9999;
+  background:repeating-linear-gradient(to bottom, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 2px, rgba(0,0,0,.05) 3px);
+  mix-blend-mode:overlay; opacity:.5;
+}
+
+a{ color:inherit; text-decoration:none; }
+img{ max-width:100%; display:block; }
+.wrap{ max-width:var(--wrap); margin:0 auto; padding-inline:var(--pad); }
+
+/* ---------- shared type devices ---------- */
+.eyebrow{ font-family:var(--font-mono); font-size:12px; letter-spacing:.28em; text-transform:uppercase; color:var(--aqua); display:inline-flex; align-items:center; gap:12px; }
+.eyebrow::before{ content:""; width:22px; height:1px; background:var(--aqua); display:inline-block; }
+
+h2.section-title{ font-family:var(--font-display); font-weight:600; font-size:clamp(28px, 4.4vw, 48px); line-height:1.05; letter-spacing:-.01em; margin:18px 0 0; max-width:20ch; color:var(--ink); }
+.section-lead{ color:var(--ink-dim); max-width:56ch; margin-top:18px; font-size:clamp(16px,1.6vw,19px); }
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+.site-header{ position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:16px var(--pad); border-bottom:1px solid transparent; transition:background .35s ease, border-color .35s ease, backdrop-filter .35s ease; }
+.site-header.scrolled{ background:rgba(9,12,18,.82); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+.site-header{ transform:translateY(0); opacity:1; pointer-events:auto; transition:background .35s ease, border-color .35s ease, backdrop-filter .35s ease, transform .4s ease, opacity .4s ease; }
+.site-header.header-hidden{ transform:translateY(-100%); opacity:0; pointer-events:none; }
+.brand{ display:flex; align-items:center; gap:14px; }
+.brand .studio{ font-family:var(--font-mono); font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:var(--ink-faint); }
+.brand .brand-logo{ height:30px; width:auto; display:block; }
+
+.nav{ display:flex; align-items:center; gap:30px; }
+.nav a{ font-family:var(--font-mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-dim); transition:color .2s ease; }
+.nav a:hover, .nav a:focus-visible{ color:var(--ink); }
+.nav .nav-cta{ color:#fff; background:var(--red); padding:9px 16px; font-weight:500; }
+.nav .nav-cta:hover{ background:var(--red-bright); color:#fff; }
+
+.menu-toggle{ display:none; background:none; border:0; color:var(--ink); cursor:pointer; font-family:var(--font-mono); font-size:12px; letter-spacing:.14em; }
+
+/* =========================================================
+   SECTIONS
+   ========================================================= */
+section.block{ padding-block:clamp(80px,11vw,150px); position:relative; }
+.divider{ height:1px; background:var(--line); }
+
+/* ---------- CREDITS / CONTRIBUTORS ---------- */
+.credits .credits-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); margin-top:56px; border:1px solid var(--line); }
+.credits .cx-card{ background:var(--surface); padding:clamp(28px,3.5vw,44px); position:relative; }
+.credits .cx-card .bar{ position:absolute; left:0; top:0; bottom:0; width:3px; }
+.credits .cx-card.c1 .bar{ background:var(--aqua); }
+.credits .cx-card.c2 .bar{ background:var(--red); }
+.credits .cx-card h3{ font-family:var(--font-display); font-weight:600; font-size:clamp(20px,2.2vw,26px); margin:8px 0 14px; color:var(--ink); }
+.credits .cx-card p{ color:var(--ink-dim); max-width:46ch; }
+.credits .cx-card p + p{ margin-top:14px; }
+.credits .cx-card p .accent{ color:var(--ink); font-weight:500; }
+.credits .credit-note{ font-family:var(--font-mono); font-size:12px; letter-spacing:.06em; color:var(--aqua); margin-top:16px; display:inline-flex; align-items:flex-start; gap:10px; }
+.credits .credit-note::before{ content:""; width:16px; height:1px; background:var(--aqua); margin-top:9px; flex:0 0 auto; }
+.credits .credit-cta{ margin-top:44px; }
+@media (max-width:900px){ .credits .credits-grid{ grid-template-columns:1fr; } }
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.site-footer{ border-top:1px solid var(--line); background:var(--ground-2); padding-block:clamp(48px,7vw,80px); }
+.footer-top{ display:flex; justify-content:space-between; gap:40px; flex-wrap:wrap; }
+.footer-brand .mark{ font-family:var(--font-display); font-weight:700; font-size:22px; color:var(--ink); }
+.footer-brand .mark .fk-via{ color:var(--red); }
+.footer-brand .mark .fk-games{ color:var(--aqua); }
+.footer-brand p{ color:var(--ink-dim); max-width:40ch; margin-top:14px; font-size:15px; }
+.footer-links{ display:flex; gap:56px; flex-wrap:wrap; }
+.footer-col h5{ font-family:var(--font-mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:16px; }
+.footer-col a{ display:block; color:var(--ink-dim); font-size:15px; margin-bottom:10px; transition:color .2s ease; }
+.footer-col a:hover{ color:var(--ink); }
+.footer-col .soon-link{ display:block; color:var(--ink-faint); font-size:15px; margin-bottom:10px; }
+.footer-bottom{ margin-top:52px; padding-top:26px; border-top:1px solid var(--line); display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px; font-family:var(--font-mono); font-size:11px; letter-spacing:.1em; color:var(--ink-faint); }
+
+/* ---------- reveal ---------- */
+.reveal{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
+.reveal.in{ opacity:1; transform:none; }
+
+/* ---------- responsive ---------- */
+@media (max-width:900px){
+  .nav{ position:fixed; inset:0 0 auto 0; top:0; flex-direction:column; align-items:flex-start; gap:0; background:var(--ground-2); padding:88px var(--pad) 32px; border-bottom:1px solid var(--line); transform:translateY(-105%); transition:transform .35s ease; }
+  .nav.open{ transform:none; }
+  .nav a{ padding:14px 0; width:100%; border-bottom:1px solid var(--line); font-size:14px; }
+  .nav .nav-cta{ margin-top:16px; width:auto; }
+  .menu-toggle{ display:block; z-index:110; }
+}
+@media (max-width:520px){
+  body{ font-size:16px; }
+  .footer-links{ gap:36px; }
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{ animation:none !important; transition:none !important; scroll-behavior:auto !important; }
+  .reveal{ opacity:1; transform:none; }
+}
+:focus-visible{ outline:2px solid var(--aqua); outline-offset:3px; }
+
+</style>
+
+<style>
+  .credits-page{ padding-top:96px; }
+  .credits-hero .section-title{ font-family:var(--font-display); font-weight:600; font-size:clamp(30px,5vw,52px); line-height:1.04; letter-spacing:-.01em; }
+  .back-link{ display:inline-flex; align-items:center; gap:8px; font-family:var(--font-mono); font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-dim); margin-bottom:26px; transition:color .2s ease; }
+  .back-link:hover{ color:var(--aqua); }
+  .manifest{ margin-top:48px; border:1px solid var(--line); }
+  .manifest-row{ display:grid; grid-template-columns:230px 1fr; gap:24px; align-items:start; padding:20px 26px; border-bottom:1px solid var(--line); background:var(--surface); }
+  .manifest-row:last-child{ border-bottom:0; }
+  .manifest-role{ font-family:var(--font-mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--aqua); padding-top:2px; }
+  .manifest-name{ font-family:var(--font-display); font-weight:600; font-size:18px; color:var(--ink); line-height:1.25; }
+  .manifest-name.accent{ color:var(--ink); }
+  .manifest-names{ display:flex; flex-direction:column; gap:6px; }
+  .nav-current{ color:var(--ink) !important; }
+  @media (max-width:760px){
+    .manifest-row{ grid-template-columns:1fr; gap:8px; }
+  }
+</style>
+
+</head>
+
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header" id="header">
+  <a href="index.html#top" class="brand" aria-label="ARCDROP home">
+    <span class="studio">Via Games</span>
+  </a>
+
+  <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="nav">Menu</button>
+
+  <nav class="nav" id="nav">
+    <a href="index.html#premise">Premise</a>
+    <a href="index.html#systems">Systems</a>
+    <a href="testplay.html">Testplay</a>
+    <a href="index.html#world">World</a>
+    <a href="index.html#status">Status</a>
+    <a href="credits.html" aria-current="page" class="nav-current">Credits</a>
+    <a href="https://discord.gg/SegRcWahHf" target="_blank" rel="noopener" class="nav-cta">Join the Via Games Discord</a>
+  </nav>
+</header>
+
+
+<!-- ============ CREDITS PAGE ============ -->
+<main id="top" class="credits-page">
+<section class="block credits credits-hero" id="credits">
+  <div class="wrap">
+    <div class="reveal">
+      <a href="index.html#credits" class="back-link">&larr; Back to ARCDROP</a>
+      <span class="eyebrow">Field manifest</span>
+      <h1 class="section-title" style="margin-top:18px;">Built by one. Shaped by many.</h1>
+      <p class="section-lead">ARCDROP is a solo project under Via Games. Every hand that helps move it forward is logged here, and every contributor earns a credit in the final product. This game is dedicated to those we've lost, and those we've yet to.</p>
+    </div>
+
+    <div class="credits-grid reveal">
+      <article class="cx-card c1">
+        <span class="bar"></span>
+        <h3>One operative on the ground</h3>
+        <p>The engine work, the SHELL, the Pod Array, the suit stats, the world. All of it is built and maintained by a single developer.</p>
+        <p>No build ships in a vacuum, though. Every playtest, bug report, asset, fix, and late-night piece of advice leaves a mark on ARCDROP, and those marks are what turn a build into something worth dropping into.</p>
+      </article>
+
+      <article class="cx-card c2">
+        <span class="bar"></span>
+        <h3>Credited in the field</h3>
+        <p><span class="accent">Anyone who contributes to ARCDROP in any capacity earns a credit in the finished game.</span> Code, art, audio, testing, feedback, a fix that unblocked a hard problem. If you helped move ARCDROP forward, your name ships with it.</p>
+        <p>The Via Games Discord is where that work happens: playtest calls, build notes, and the conversations that shape what gets built next.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="divider"></div></div>
+
+<section class="block credits">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">Contributors</span>
+      <h2 class="section-title">The manifest</h2>
+      <p class="section-lead">Everyone who has helped move ARCDROP forward. Roles keep filling in as the demo comes together.</p>
+    </div>
+
+    <div class="manifest reveal">
+      <div class="manifest-row">
+        <span class="manifest-role">Project Lead</span>
+        <div class="manifest-names">
+          <span class="manifest-name accent">Joe Polidoro &mdash; Via Games LLC</span>
+        </div>
+      </div>
+      <div class="manifest-row">
+        <span class="manifest-role">3D Model Artists</span>
+        <div class="manifest-names">
+          <span class="manifest-name">Mario Benvenuto</span>
+          <span class="manifest-name">Martin Ljungblad</span>
+          <span class="manifest-name">Ryan Honey</span>
+        </div>
+      </div>
+      <div class="manifest-row">
+        <span class="manifest-role">Programmers</span>
+        <div class="manifest-names">
+          <span class="manifest-name">Marcin Matuszczyk</span>
+          <span class="manifest-name">Reynaldo Vilela</span>
+          <span class="manifest-name">Everett Gunther</span>
+        </div>
+      </div>
+      <div class="manifest-row">
+        <span class="manifest-role">Lead QA</span>
+        <div class="manifest-names">
+          <span class="manifest-name">Jon McCabe</span>
+        </div>
+      </div>
+      <div class="manifest-row">
+        <span class="manifest-role">Playtesters</span>
+        <div class="manifest-names">
+          <span class="manifest-name">Glaucius</span>
+          <span class="manifest-name">Michael Polillo</span>
+          <span class="manifest-name">OfficerFriendly</span>
+          <span class="manifest-name">Robert Di Tullio III</span>
+          <span class="manifest-name">Sheriour</span>
+          <span class="manifest-name">Toma</span>
+          <span class="manifest-name">Walter Hess</span>
+          <span class="manifest-name">Westep23</span>
+          <span class="manifest-name">William Austin Estep</span>
+          <span class="manifest-name">William Foley</span>
+        </div>
+      </div>
+      <div class="manifest-row">
+        <span class="manifest-role">Font Artist</span>
+        <div class="manifest-names">
+          <span class="manifest-name">Emmeran Richard</span>
+        </div>
+      </div>
+      <div class="manifest-row">
+        <span class="manifest-role">Marketing Editor</span>
+        <div class="manifest-names">
+          <span class="manifest-name">Josh Narlesky</span>
+        </div>
+      </div>
+      <div class="manifest-row">
+        <span class="manifest-role">Special Thanks</span>
+        <div class="manifest-names">
+          <span class="manifest-name">SomewhatToastyToast</span>
+          <span class="manifest-name">The Solo Collective</span>
+          <span class="manifest-name">Everyone in the ARCDROP Discord</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="credit-cta reveal">
+      <a href="https://discord.gg/SegRcWahHf" target="_blank" rel="noopener" class="btn btn-primary">Get involved on Discord</a>
+      <a href="index.html#credits" class="btn btn-ghost">Back to ARCDROP</a>
+    </div>
+  </div>
+</section>
+</main>
+
+
+<!-- ============ FOOTER / VIA GAMES ============ -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="mark"><span class="fk-via">Via</span> <span class="fk-games">Games</span></div>
+        <p>An independent game studio building ARCDROP. Made solo in New Jersey, USA.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h5>ARCDROP</h5>
+          <a href="index.html#premise">Premise</a>
+          <a href="index.html#systems">Systems</a>
+          <a href="testplay.html">Testplay</a>
+          <a href="index.html#world">World</a>
+          <a href="index.html#status">Roadmap</a>
+          <a href="credits.html">Credits</a>
+        </div>
+        <div class="footer-col">
+          <h5>Follow</h5>
+          <a href="https://discord.gg/SegRcWahHf" target="_blank" rel="noopener">Discord</a>
+          <a href="https://www.youtube.com/@ViaGames_Official" target="_blank" rel="noopener">YouTube</a>
+          <span class="soon-link">Steam (soon)</span>
+        </div>
+        <div class="footer-col">
+          <h5>Studio</h5>
+          <a href="mailto:Polidoro@Via-Games.com">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Via Games LLC. All rights reserved.</span>
+      <span>ARCDROP® is a registered trademark of Via Games LLC.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---------- Header background on scroll ---------- */
+const header = document.getElementById('header');
+const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 40);
+onScroll();
+window.addEventListener('scroll', onScroll, { passive:true });
+
+/* ---------- Mobile menu ---------- */
+const toggle = document.getElementById('menuToggle');
+const nav = document.getElementById('nav');
+toggle.addEventListener('click', () => {
+  const open = nav.classList.toggle('open');
+  toggle.setAttribute('aria-expanded', open);
+  toggle.textContent = open ? 'Close' : 'Menu';
+});
+nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  nav.classList.remove('open');
+  toggle.setAttribute('aria-expanded', false);
+  toggle.textContent = 'Menu';
+}));
+
+/* ---------- Reveal on scroll ---------- */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold:0.12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
