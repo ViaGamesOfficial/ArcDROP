@@ -1,0 +1,1184 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>ArcDROP Handbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+  :root {
+    --paper:      #F1F3F5;
+    --surface:    #FFFFFF;
+    --surface-2:  #E9ECEF;
+    --ink:        #171B21;
+    --ink-soft:   #454E58;
+    --muted:      #79828D;
+    --line:       #D7DCE1;
+    --line-soft:  #E4E8EC;
+    --accent:     #C4611F;
+    --accent-hi:  #E07B39;
+    --cool:       #1F6F7C;
+    --good:       #2F8F5B;
+    --warn:       #B4791C;
+
+    --fac-viator:     #3B6FD4;
+    --fac-illuminate: #C89328;
+    --fac-arbiter:    #B8434F;
+    --fac-neutral:    #6D7681;
+
+    --font-display: "Archivo", "Segoe UI", system-ui, sans-serif;
+    --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Code", monospace;
+
+    --maxw: 760px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:      #0F1216;
+      --surface:    #161B21;
+      --surface-2:  #1E252D;
+      --ink:        #E8EBEE;
+      --ink-soft:   #AEB6BF;
+      --muted:      #7C868F;
+      --line:       #29313A;
+      --line-soft:  #202730;
+      --accent:     #F0954A;
+      --accent-hi:  #F5A862;
+      --cool:       #57B7C4;
+      --good:       #58BE86;
+      --warn:       #DDA94A;
+
+      --fac-viator:     #6B97EA;
+      --fac-illuminate: #E0B84B;
+      --fac-arbiter:    #E0707C;
+      --fac-neutral:    #8A939E;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper:      #0F1216;
+    --surface:    #161B21;
+    --surface-2:  #1E252D;
+    --ink:        #E8EBEE;
+    --ink-soft:   #AEB6BF;
+    --muted:      #7C868F;
+    --line:       #29313A;
+    --line-soft:  #202730;
+    --accent:     #F0954A;
+    --accent-hi:  #F5A862;
+    --cool:       #57B7C4;
+    --good:       #58BE86;
+    --warn:       #DDA94A;
+
+    --fac-viator:     #6B97EA;
+    --fac-illuminate: #E0B84B;
+    --fac-arbiter:    #E0707C;
+    --fac-neutral:    #8A939E;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; scroll-padding-top: 2rem; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; }
+  }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 clamp(1.1rem, 4vw, 2.4rem);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  @media (min-width: 980px) {
+    .wrap {
+      grid-template-columns: 224px minmax(0, 1fr);
+      align-items: start;
+      gap: 3.2rem;
+    }
+  }
+
+  /* ---------- Masthead ---------- */
+  .masthead {
+    grid-column: 1 / -1;
+    border-bottom: 1px solid var(--line);
+    padding: clamp(2.2rem, 5vw, 3.4rem) 0 1.8rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.4rem;
+  }
+  .brand-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 0.55rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .brand-eyebrow::before {
+    content: "";
+    width: 26px; height: 2px;
+    background: var(--accent);
+    display: inline-block;
+  }
+  h1.brand {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2.1rem, 6vw, 3.1rem);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .brand-sub {
+    color: var(--ink-soft);
+    margin: 0.7rem 0 0;
+    max-width: 42ch;
+    font-size: 0.98rem;
+  }
+  .masthead-meta {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--muted);
+    text-align: right;
+    line-height: 1.9;
+  }
+  .masthead-meta b { color: var(--ink-soft); font-weight: 600; }
+
+  .theme-toggle {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    background: var(--surface);
+    color: var(--ink-soft);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.4rem 0.85rem;
+    cursor: pointer;
+    margin-top: 0.6rem;
+    transition: border-color .15s, color .15s;
+  }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+  .theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* ---------- Sidebar nav ---------- */
+  .sidenav { position: relative; }
+  @media (min-width: 980px) {
+    .sidenav { position: sticky; top: 1.8rem; }
+  }
+  .sidenav h2 {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 0.9rem;
+  }
+  .sidenav ol { list-style: none; margin: 0 0 1.6rem; padding: 0; counter-reset: nav; }
+  .sidenav li { margin: 0; }
+  .sidenav a {
+    display: flex;
+    gap: 0.6rem;
+    text-decoration: none;
+    color: var(--ink-soft);
+    padding: 0.34rem 0;
+    font-size: 0.9rem;
+    border-left: 2px solid transparent;
+    padding-left: 0.75rem;
+    margin-left: -0.75rem;
+    transition: color .15s, border-color .15s;
+  }
+  .sidenav a .n {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--muted);
+    padding-top: 0.06rem;
+  }
+  .sidenav a:hover { color: var(--accent); }
+  .sidenav a.active { color: var(--ink); border-left-color: var(--accent); font-weight: 600; }
+  .sidenav a.active .n { color: var(--accent); }
+  .sidenav .sub a { font-size: 0.83rem; padding-left: 1.8rem; color: var(--muted); }
+  .sidenav .sub a:hover { color: var(--accent); }
+
+  /* ---------- Content ---------- */
+  main { min-width: 0; padding-bottom: 5rem; }
+
+  section { scroll-margin-top: 1.5rem; }
+  section + section { margin-top: 3.6rem; }
+
+  .sec-head { margin-bottom: 1.6rem; }
+  .sec-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cool);
+    display: flex; align-items: center; gap: 0.6rem;
+    margin-bottom: 0.6rem;
+  }
+  .sec-kicker .idx {
+    font-weight: 600;
+    color: var(--paper);
+    background: var(--cool);
+    border-radius: 4px;
+    padding: 0.05rem 0.4rem;
+    letter-spacing: 0.08em;
+  }
+  h2.sec-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.6rem, 3.6vw, 2.1rem);
+    letter-spacing: -0.015em;
+    line-height: 1.1;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .sec-lede { color: var(--ink-soft); max-width: var(--maxw); margin: 0.8rem 0 0; }
+
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.18rem;
+    letter-spacing: -0.01em;
+    margin: 2.4rem 0 0.5rem;
+    padding-top: 0.4rem;
+  }
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.98rem;
+    margin: 1.6rem 0 0.4rem;
+  }
+  p { max-width: var(--maxw); }
+  main p { margin: 0.7rem 0; }
+  a.inline { color: var(--accent); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); }
+  a.inline:hover { border-bottom-color: var(--accent); }
+
+  code, .mono { font-family: var(--font-mono); font-size: 0.86em; }
+  p code, li code, td code {
+    background: var(--surface-2);
+    color: var(--ink);
+    padding: 0.08em 0.4em;
+    border-radius: 4px;
+    font-size: 0.82em;
+  }
+
+  .lead-note {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin: 1.4rem 0;
+    font-size: 0.94rem;
+    color: var(--ink-soft);
+    max-width: var(--maxw);
+  }
+  .lead-note b { color: var(--ink); }
+
+  /* ---------- Admin registry ---------- */
+  .reg-group { margin-top: 2rem; }
+  .reg-group > h3 { margin-top: 0; }
+  .reg {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--surface);
+    max-width: var(--maxw);
+  }
+  .reg-row {
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    border-top: 1px solid var(--line-soft);
+  }
+  .reg-row:first-child { border-top: none; }
+  .reg-row > dt {
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.85rem 1rem;
+    color: var(--ink);
+    background: color-mix(in srgb, var(--surface-2) 55%, transparent);
+    border-right: 1px solid var(--line-soft);
+    margin: 0;
+  }
+  .reg-row > dt small { display: block; font-weight: 400; color: var(--muted); font-size: 0.74rem; margin-top: 0.15rem; letter-spacing: 0.02em; }
+  .reg-row > dd { margin: 0; padding: 0.85rem 1rem; }
+  .fill {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--muted);
+    border-bottom: 1px dashed var(--line);
+    padding-bottom: 0.15rem;
+    display: inline-block;
+    min-width: 60%;
+  }
+  .fill::before { content: "▸ "; color: var(--accent); }
+  .val { font-size: 0.9rem; color: var(--ink); }
+  .val .mono { font-size: 0.82rem; color: var(--ink-soft); }
+  .val .ok { color: var(--good); font-family: var(--font-mono); font-size: 0.7rem; margin-left: 0.35rem; letter-spacing: 0.04em; }
+  .edit {
+    width: 100%;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--ink);
+    background: transparent;
+    border: none;
+    border-bottom: 1px dashed var(--line);
+    border-radius: 0;
+    padding: 0.15rem 0 0.25rem;
+  }
+  .edit::placeholder { color: var(--muted); }
+  .edit:hover { border-bottom-color: var(--muted); }
+  .edit:focus { outline: none; border-bottom: 1px solid var(--accent); }
+  .edit:not(:placeholder-shown) { border-bottom-style: solid; border-bottom-color: color-mix(in srgb, var(--good) 55%, var(--line)); }
+  @media (max-width: 560px) {
+    .reg-row { grid-template-columns: 1fr; }
+    .reg-row > dt { border-right: none; border-bottom: 1px solid var(--line-soft); }
+  }
+
+  /* ---------- Steps ---------- */
+  ol.steps { counter-reset: step; list-style: none; margin: 1.4rem 0; padding: 0; max-width: var(--maxw); }
+  ol.steps > li {
+    counter-increment: step;
+    position: relative;
+    padding: 0 0 1.5rem 3rem;
+    border-left: 2px solid var(--line);
+    margin-left: 0.9rem;
+  }
+  ol.steps > li:last-child { border-left-color: transparent; padding-bottom: 0; }
+  ol.steps > li::before {
+    content: counter(step);
+    position: absolute;
+    left: -0.95rem; top: -0.2rem;
+    width: 1.85rem; height: 1.85rem;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+  :root[data-theme="dark"] ol.steps > li::before,
+  :root:not([data-theme="light"]) ol.steps > li::before { color: #1a1205; }
+  @media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) ol.steps > li::before { color:#fff; } }
+  ol.steps > li h4 { margin: 0 0 0.35rem; font-size: 1.02rem; padding-top: 0.15rem; }
+  ol.steps > li p { margin: 0.35rem 0; font-size: 0.94rem; }
+  ol.steps ul { margin: 0.5rem 0; padding-left: 1.1rem; font-size: 0.92rem; color: var(--ink-soft); }
+  ol.steps ul li { margin: 0.25rem 0; }
+
+  /* ---------- Field table ---------- */
+  .table-scroll { overflow-x: auto; max-width: var(--maxw); border: 1px solid var(--line); border-radius: 10px; margin: 1.3rem 0; }
+  table.fields { border-collapse: collapse; width: 100%; font-size: 0.88rem; min-width: 640px; }
+  table.fields th, table.fields td { text-align: left; padding: 0.6rem 0.85rem; border-top: 1px solid var(--line-soft); vertical-align: top; }
+  table.fields thead th {
+    border-top: none;
+    background: var(--surface-2);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+    position: sticky; top: 0;
+  }
+  table.fields tbody tr:nth-child(even) { background: color-mix(in srgb, var(--surface-2) 32%, transparent); }
+  table.fields td.f-name { white-space: nowrap; }
+  table.fields td.f-name code { font-family: var(--font-mono); color: var(--accent); font-size: 0.82rem; font-weight: 500; background: none; padding: 0; }
+  table.fields td.f-type { font-family: var(--font-mono); font-size: 0.74rem; color: var(--cool); white-space: nowrap; }
+  table.fields td.f-desc { color: var(--ink-soft); min-width: 260px; }
+  table.fields td.f-desc b { color: var(--ink); font-weight: 600; }
+
+  .req-tag {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.1rem 0.35rem;
+    border-radius: 3px;
+    vertical-align: middle;
+    margin-left: 0.4rem;
+  }
+  .req-tag.req { background: color-mix(in srgb, var(--accent) 18%, transparent); color: var(--accent); }
+  .req-tag.opt { background: var(--surface-2); color: var(--muted); }
+
+  /* ---------- Faction chips ---------- */
+  .factions { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1rem 0; max-width: var(--maxw); }
+  .fac {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    padding: 0.3rem 0.7rem 0.3rem 0.6rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    display: inline-flex; align-items: center; gap: 0.45rem;
+    background: var(--surface);
+  }
+  .fac::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--dot); }
+
+  /* ---------- Pipeline diagram ---------- */
+  .flow {
+    display: flex; flex-wrap: wrap; align-items: stretch; gap: 0.5rem;
+    margin: 1.5rem 0; max-width: var(--maxw);
+  }
+  .flow .node {
+    flex: 1 1 130px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 0.7rem 0.8rem;
+    position: relative;
+  }
+  .flow .node .k { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
+  .flow .node .v { font-size: 0.82rem; font-weight: 600; margin-top: 0.2rem; line-height: 1.25; }
+  .flow .node .d { font-size: 0.72rem; color: var(--muted); margin-top: 0.2rem; }
+  .flow .arrow { align-self: center; color: var(--muted); font-family: var(--font-mono); font-size: 1rem; }
+  @media (max-width: 620px) { .flow .arrow { transform: rotate(90deg); } .flow .node { flex-basis: 100%; } }
+
+  .callout {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.85rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1rem 1.15rem;
+    margin: 1.5rem 0;
+    max-width: var(--maxw);
+    font-size: 0.92rem;
+  }
+  .callout .tag {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    height: fit-content;
+    white-space: nowrap;
+  }
+  .callout.mem .tag { background: color-mix(in srgb, var(--cool) 18%, transparent); color: var(--cool); }
+  .callout.warn .tag { background: color-mix(in srgb, var(--warn) 20%, transparent); color: var(--warn); }
+  .callout p { margin: 0; color: var(--ink-soft); }
+  .callout p b { color: var(--ink); }
+  .callout p + p { margin-top: 0.45rem; }
+
+  hr.rule { border: none; border-top: 1px solid var(--line); margin: 3rem 0; max-width: var(--maxw); }
+
+  .footer {
+    grid-column: 1 / -1;
+    border-top: 1px solid var(--line);
+    padding: 1.8rem 0 3rem;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--muted);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.6rem;
+  }
+
+  .pill-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.6rem 0; }
+  .pill { font-family: var(--font-mono); font-size: 0.72rem; padding: 0.2rem 0.55rem; border: 1px solid var(--line); border-radius: 5px; color: var(--ink-soft); background: var(--surface); }
+
+  /* ---------- Ideas ---------- */
+  .composer {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 1rem;
+    max-width: var(--maxw);
+    margin: 1.4rem 0;
+  }
+  .composer textarea {
+    width: 100%;
+    min-height: 74px;
+    resize: vertical;
+    background: var(--paper);
+    color: var(--ink);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 0.6rem 0.75rem;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  .composer textarea::placeholder { color: var(--muted); }
+  .composer textarea:focus-visible,
+  .composer select:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+  .composer-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem; margin-top: 0.7rem; }
+  .composer select {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    background: var(--paper);
+    color: var(--ink);
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    padding: 0.42rem 0.6rem;
+    cursor: pointer;
+  }
+  .composer .hint { font-family: var(--font-mono); font-size: 0.68rem; color: var(--muted); margin-right: auto; }
+  .btn {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    letter-spacing: 0.04em;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink-soft);
+    border-radius: 7px;
+    padding: 0.45rem 0.85rem;
+    cursor: pointer;
+    transition: border-color .15s, color .15s, background .15s;
+  }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); font-weight: 600; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn.primary { color: #1a1205; } }
+  :root[data-theme="dark"] .btn.primary { color: #1a1205; }
+  :root[data-theme="light"] .btn.primary { color: #fff; }
+  .btn.primary:hover { background: var(--accent-hi); border-color: var(--accent-hi); color: #fff; }
+  :root[data-theme="dark"] .btn.primary:hover { color:#1a1205; }
+  .btn.danger:hover { border-color: var(--fac-arbiter); color: var(--fac-arbiter); }
+
+  .ideas-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem; max-width: var(--maxw); margin: 1.6rem 0 0.9rem; }
+  .ideas-count { font-family: var(--font-mono); font-size: 0.74rem; color: var(--muted); margin-right: auto; }
+  .ideas-count b { color: var(--ink); }
+
+  .idea-list { list-style: none; margin: 0; padding: 0; max-width: var(--maxw); display: flex; flex-direction: column; gap: 0.6rem; }
+  .idea-card {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 0.7rem;
+    align-items: start;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 0.75rem 0.85rem;
+  }
+  .idea-card .cat {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    white-space: nowrap;
+    color: var(--paper);
+    background: var(--catc, var(--fac-neutral));
+    margin-top: 0.1rem;
+  }
+  .idea-card .body { min-width: 0; }
+  .idea-card .txt { font-size: 0.94rem; white-space: pre-wrap; word-break: break-word; }
+  .idea-card .meta { font-family: var(--font-mono); font-size: 0.66rem; color: var(--muted); margin-top: 0.3rem; }
+  .idea-card .del {
+    background: none; border: none; cursor: pointer;
+    color: var(--muted); font-size: 1.05rem; line-height: 1;
+    padding: 0.1rem 0.3rem; border-radius: 5px;
+  }
+  .idea-card .del:hover { color: var(--fac-arbiter); background: color-mix(in srgb, var(--fac-arbiter) 12%, transparent); }
+  .idea-card .del:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+  .ideas-empty {
+    max-width: var(--maxw);
+    border: 1px dashed var(--line);
+    border-radius: 10px;
+    padding: 1.6rem 1.2rem;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <p class="brand-eyebrow">ArcDROP · Studio Handbook</p>
+      <h1 class="brand">ArcDROP Handbook</h1>
+      <p class="brand-sub">Operations registry and asset-creation pipelines for the ArcDROP project — the reference for who runs what, and how each game asset gets built.</p>
+    </div>
+    <div class="masthead-meta">
+      <div><b>Owner</b> · polidoro@via&#8209;games.com</div>
+      <div><b>Engine</b> · Unreal · <span class="mono">ARCDROP</span></div>
+      <div><b>Revised</b> · 2026&#8209;08&#8209;27</div>
+      <button class="theme-toggle" id="themeBtn" type="button" aria-label="Toggle color theme">◐ Theme</button>
+    </div>
+  </header>
+
+  <nav class="sidenav" aria-label="Table of contents">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#admin"><span class="n">01</span><span>Administration</span></a></li>
+      <li class="sub"><a href="#admin-domain">Domain &amp; web</a></li>
+      <li class="sub"><a href="#admin-infra">Infrastructure &amp; backup</a></li>
+      <li class="sub"><a href="#admin-workstation">Workstation &amp; streaming</a></li>
+      <li class="sub"><a href="#admin-accounts">Accounts &amp; licenses</a></li>
+      <li><a href="#pods"><span class="n">02</span><span>Creating a Pod</span></a></li>
+      <li class="sub"><a href="#pods-overview">Pipeline overview</a></li>
+      <li class="sub"><a href="#pods-datatable">A · Data Table row</a></li>
+      <li class="sub"><a href="#pods-fields">Field reference</a></li>
+      <li class="sub"><a href="#pods-blueprint">B · Blueprint handling</a></li>
+      <li class="sub"><a href="#pods-special">Special behaviors</a></li>
+      <li><a href="#template"><span class="n">03</span><span>Adding asset types</span></a></li>
+      <li><a href="#ideas"><span class="n">04</span><span>Ideas &amp; backlog</span></a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <!-- ============ ADMINISTRATION ============ -->
+    <section id="admin">
+      <div class="sec-head">
+        <div class="sec-kicker"><span class="idx">01</span> Administration</div>
+        <h2 class="sec-title">Accounts, services &amp; the people who run them</h2>
+        <p class="sec-lede">The registry of external services ArcDROP depends on — where the domain lives, who backs up the data, what streams the workstation — so any of it can be recovered or handed off without guesswork.</p>
+      </div>
+
+      <div class="lead-note">
+        <b>Fill these in right on the page.</b> Each value saves to <em>this browser</em> automatically and is never written to the repo — so your real service names and usernames stay private even though the page itself is public. Use <b>Copy all</b> to back them up or hand them off. Still keep passwords, API keys, and full account numbers out; this records <em>where</em> things live and <em>who</em> owns them.
+      </div>
+      <div class="ideas-toolbar" style="margin-top:1rem">
+        <span class="ideas-count" id="regStatus">Auto-saves to this browser</span>
+        <button class="btn" id="regCopy" type="button">⧉ Copy all</button>
+        <button class="btn danger" id="regClear" type="button">Reset fields</button>
+      </div>
+
+      <div class="reg-group" id="admin-domain">
+        <h3>Domain &amp; web</h3>
+        <dl class="reg">
+          <div class="reg-row"><dt>Domain registrar<small>Where the domain name is registered</small></dt><dd><input class="edit" data-key="registrar" placeholder="provider &amp; account email"></dd></div>
+          <div class="reg-row"><dt>Primary domain(s)<small>Registered names + renewal date</small></dt><dd><input class="edit" data-key="domains" placeholder="domain.com · renews YYYY-MM-DD"></dd></div>
+          <div class="reg-row"><dt>DNS host<small>Who serves the DNS records</small></dt><dd><input class="edit" data-key="dns" placeholder="provider (may differ from registrar)"></dd></div>
+          <div class="reg-row"><dt>Web hosting<small>Where the site is served from</small></dt><dd><input class="edit" data-key="hosting" value="GitHub Pages" placeholder="host &amp; plan"></dd></div>
+          <div class="reg-row"><dt>Live handbook URL<small>Where this page is published</small></dt><dd><input class="edit" data-key="url" placeholder="username.github.io/... (confirm)"></dd></div>
+          <div class="reg-row"><dt>SSL / certificates<small>Issuer &amp; renewal method</small></dt><dd><input class="edit" data-key="ssl" value="GitHub Pages — automatic HTTPS (Let's Encrypt, auto-renew)" placeholder="issuer · auto/manual"></dd></div>
+          <div class="reg-row"><dt>Email / mailbox<small>Business email provider</small></dt><dd><input class="edit" data-key="email" placeholder="provider (e.g. via-games.com mail)"></dd></div>
+        </dl>
+      </div>
+
+      <div class="reg-group" id="admin-infra">
+        <h3>Infrastructure &amp; backup</h3>
+        <dl class="reg">
+          <div class="reg-row"><dt>Backup storage<small>Where project backups live</small></dt><dd><input class="edit" data-key="backup-storage" placeholder="service &amp; account"></dd></div>
+          <div class="reg-row"><dt>Backup schedule<small>Cadence &amp; retention</small></dt><dd><input class="edit" data-key="backup-schedule" placeholder="e.g. nightly, 30-day retention"></dd></div>
+          <div class="reg-row"><dt>Source control<small>Repo host for the codebase</small></dt><dd><input class="edit" data-key="scm" placeholder="host + org/repo"></dd></div>
+          <div class="reg-row"><dt>Large-file / asset storage<small>LFS, Perforce, or cloud bucket</small></dt><dd><input class="edit" data-key="asset-storage" placeholder="system &amp; location"></dd></div>
+          <div class="reg-row"><dt>Build / CI<small>Automated build service, if any</small></dt><dd><input class="edit" data-key="ci" placeholder="service &amp; pipeline"></dd></div>
+        </dl>
+      </div>
+
+      <div class="reg-group" id="admin-workstation">
+        <h3>Workstation &amp; streaming</h3>
+        <dl class="reg">
+          <div class="reg-row"><dt>Desktop streaming<small>Remote-desktop / cloud-workstation service</small></dt><dd><input class="edit" data-key="streaming" placeholder="service &amp; account"></dd></div>
+          <div class="reg-row"><dt>Dev workstation<small>Primary machine &amp; specs</small></dt><dd><input class="edit" data-key="workstation" placeholder="machine name · OS · GPU"></dd></div>
+          <div class="reg-row"><dt>Remote access<small>VPN / access method</small></dt><dd><input class="edit" data-key="remote" placeholder="method"></dd></div>
+        </dl>
+      </div>
+
+      <div class="reg-group" id="admin-accounts">
+        <h3>Accounts &amp; licenses</h3>
+        <dl class="reg">
+          <div class="reg-row"><dt>Engine license<small>Unreal / Epic account</small></dt><dd><input class="edit" data-key="engine" placeholder="account &amp; seat"></dd></div>
+          <div class="reg-row"><dt>Marketplace / Fab<small>Purchased assets account</small></dt><dd><input class="edit" data-key="marketplace" placeholder="account"></dd></div>
+          <div class="reg-row"><dt>Storefront(s)<small>Steam / console dev accounts</small></dt><dd><input class="edit" data-key="storefront" placeholder="platform &amp; app ID"></dd></div>
+          <div class="reg-row"><dt>Business registration<small>Legal entity behind the studio</small></dt><dd><input class="edit" data-key="business" placeholder="entity name &amp; jurisdiction"></dd></div>
+          <div class="reg-row"><dt>Payments / billing<small>Where subscriptions are billed</small></dt><dd><input class="edit" data-key="payments" placeholder="method on file"></dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <hr class="rule">
+
+    <!-- ============ CREATING A POD ============ -->
+    <section id="pods">
+      <div class="sec-head">
+        <div class="sec-kicker"><span class="idx">02</span> Asset Pipeline</div>
+        <h2 class="sec-title">Creating a Pod</h2>
+        <p class="sec-lede">A Pod is defined once as a Data Table row, becomes a runtime <code>UPodItem</code> when given to the player, and — when equipped into the Shell's Pod Array — spawns its <code>APodActor</code> to apply effects. Here is the full path, field by field.</p>
+      </div>
+
+      <div id="pods-overview">
+        <h3>Pipeline overview</h3>
+        <p>Data flows in one direction. Author the row, point it at a Pod Actor Blueprint, then give the pod to the player — the equip system does the rest.</p>
+        <div class="flow" aria-label="Pod data flow: Data Table row to runtime item to equipped actor">
+          <div class="node"><div class="k">Author</div><div class="v">Data Table row</div><div class="d"><span class="mono">_PodDataTableRow</span></div></div>
+          <span class="arrow">→</span>
+          <div class="node"><div class="k">Give</div><div class="v">Runtime item</div><div class="d"><span class="mono">UPodItem</span> built from row</div></div>
+          <span class="arrow">→</span>
+          <div class="node"><div class="k">Equip</div><div class="v">Pod Array slot</div><div class="d">Shell grid, Edit Mode</div></div>
+          <span class="arrow">→</span>
+          <div class="node"><div class="k">Apply</div><div class="v">Pod Actor spawns</div><div class="d"><span class="mono">OnPodEquipped</span> fires</div></div>
+        </div>
+        <div class="factions" aria-label="Pod factions">
+          <span class="fac" style="--dot:var(--fac-viator)">Viator</span>
+          <span class="fac" style="--dot:var(--fac-illuminate)">Illuminate</span>
+          <span class="fac" style="--dot:var(--fac-arbiter)">Arbiter</span>
+          <span class="fac" style="--dot:var(--fac-neutral)">Neutral</span>
+        </div>
+        <p style="font-size:0.86rem;color:var(--muted);max-width:var(--maxw)">Every pod carries a <code>Faction</code> (<span class="mono">E_PodFaction</span>), defaulting to Neutral. Chip colors above are for this handbook only, not canonical brand values.</p>
+      </div>
+
+      <h3 id="pods-datatable">Part A · The Data Table row</h3>
+      <p>Pods live in a Data Table built on the <code>_PodDataTableRow</code> row structure (C++ <span class="mono">F_PodDataTableRow</span>). Each row is one pod definition.</p>
+      <ol class="steps">
+        <li>
+          <h4>Open (or create) the Pod Data Table</h4>
+          <p>Use the existing Pod Data Table asset. To make a new one: <b>Miscellaneous → Data Table</b>, and pick <span class="mono">_PodDataTableRow</span> as the Row Structure. A table's structure is fixed once chosen.</p>
+        </li>
+        <li>
+          <h4>Add a row</h4>
+          <p>Click <b>Add</b> (＋) and give the row a unique <b>Row Name</b> — this is the key you pass to <code>AddItemFromDataTable</code>, so keep it stable and descriptive (e.g. <span class="mono">Pod_NoFallDamage_L1</span>).</p>
+        </li>
+        <li>
+          <h4>Fill in the fields</h4>
+          <p>Work down the field reference below. At minimum a working pod needs an <code>ItemName</code>, a <code>DisplayName</code>, a <code>Shape</code>, at least one icon, and a <code>PodClass</code> so it can spawn its actor when equipped.</p>
+        </li>
+        <li>
+          <h4>Save</h4>
+          <p>Save the Data Table asset. The row is now referenceable by its Row Name anywhere in Blueprints.</p>
+        </li>
+      </ol>
+
+      <h4 id="pods-fields">Field reference — <span class="mono">_PodDataTableRow</span></h4>
+      <div class="table-scroll">
+        <table class="fields">
+          <thead>
+            <tr><th>Field</th><th>Type</th><th>What it does</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="f-name"><code>ItemName</code><span class="req-tag req">req</span></td><td class="f-type">FString</td><td class="f-desc">Internal name / key for the pod. Used in logs and lookups; not shown to the player.</td></tr>
+            <tr><td class="f-name"><code>DisplayName</code><span class="req-tag req">req</span></td><td class="f-type">FText</td><td class="f-desc">Player-facing name shown in tooltips and UI. Localizable.</td></tr>
+            <tr><td class="f-name"><code>Faction</code></td><td class="f-type">E_PodFaction</td><td class="f-desc">Viator, Illuminate, Arbiter, or <b>Neutral</b> (default).</td></tr>
+            <tr><td class="f-name"><code>Description</code></td><td class="f-type">FText</td><td class="f-desc">Flavor / summary text for the info panel.</td></tr>
+            <tr><td class="f-name"><code>Shape</code><span class="req-tag req">req</span></td><td class="f-type">F_PodShape</td><td class="f-desc">Footprint in the grid: <code>ShapeID</code> (label only), <code>RelativePositions</code> (array of cells relative to the anchor — <span class="mono">(0,0)</span> for 1×1), and <code>bCanRotate</code>.</td></tr>
+            <tr><td class="f-name"><code>FieldIcon</code></td><td class="f-type">Texture2D</td><td class="f-desc">Icon shown while the pod sits in the <b>Field Cache</b>.</td></tr>
+            <tr><td class="f-name"><code>ArrayIcon</code></td><td class="f-type">Texture2D</td><td class="f-desc">Icon shown while the pod is equipped in the <b>Pod Array</b>.</td></tr>
+            <tr><td class="f-name"><code>DragIcon</code></td><td class="f-type">Texture2D</td><td class="f-desc">Icon rendered on the drag visual while moving the pod.</td></tr>
+            <tr><td class="f-name"><code>TooltipPreviewImage</code></td><td class="f-type">Texture2D</td><td class="f-desc">Large preview image in the pod detail / info tooltip.</td></tr>
+            <tr><td class="f-name"><code>PrimaryEffects</code></td><td class="f-type">TArray&lt;FText&gt;</td><td class="f-desc">Bullet lines listed as the pod's main effects in the tooltip.</td></tr>
+            <tr><td class="f-name"><code>SecondaryEffects</code></td><td class="f-type">TArray&lt;FText&gt;</td><td class="f-desc">Secondary / minor effect lines in the tooltip.</td></tr>
+            <tr><td class="f-name"><code>bIsCoreSlot</code></td><td class="f-type">bool</td><td class="f-desc">Marks the pod as a <b>Core</b> pod (equipped via the Core slot, not the Pod Array grid). See Special behaviors.</td></tr>
+            <tr><td class="f-name"><code>PodClass</code><span class="req-tag req">req</span></td><td class="f-type">TSubclassOf&lt;APodActor&gt;</td><td class="f-desc">The Pod Actor Blueprint spawned on the Shell when equipped. Its <code>OnPodEquipped</code> / <code>OnPodUnequipped</code> events carry the actual effects. Without it, nothing spawns.</td></tr>
+            <tr><td class="f-name"><code>ItemClass</code></td><td class="f-type">TSubclassOf&lt;UPodItem&gt;</td><td class="f-desc">Runtime item class built from the row. Leave as default <code>UPodItem</code> unless the pod needs custom item logic.</td></tr>
+            <tr><td class="f-name"><code>bUniqueEquip</code></td><td class="f-type">bool</td><td class="f-desc">If true, only one pod of this "type" may be in the Pod Array at once.</td></tr>
+            <tr><td class="f-name"><code>PodTypeID</code></td><td class="f-type">FName</td><td class="f-desc">Family tag for unique-equip grouping. Pods sharing an ID lock each other out even across levels / different Pod Actor classes. <span class="mono">NAME_None</span> = fall back to matching <code>PodClass</code>.</td></tr>
+            <tr><td class="f-name"><code>PodLevel</code></td><td class="f-type">int32</td><td class="f-desc">Pod tier / level (default 1). For a Black Box pod, this is the number of Field Cache slots it protects.</td></tr>
+            <tr><td class="f-name"><code>bIsBlackBox</code></td><td class="f-type">bool</td><td class="f-desc">If true, while equipped the pod protects the first <code>PodLevel</code> Field Cache slots from <code>ClearFieldCache()</code>.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 id="pods-blueprint">Part B · Handling the Pod in Blueprints</h3>
+      <p>The row is data; the behavior lives in the Pod Actor Blueprint and the way you hand the pod to the player. This is the same for every pod.</p>
+      <ol class="steps">
+        <li>
+          <h4>Create the Pod Actor Blueprint</h4>
+          <p>New Blueprint Class → parent <code>APodActor</code>. The C++ base ships with <b>no components</b> — just the two effect events — so the root and every visual are added here in the Blueprint.</p>
+        </li>
+        <li>
+          <h4>Add the Static Mesh(es) &amp; visual components</h4>
+          <p>Give the Blueprint a root <b>Scene Component</b>, then add the pod's geometry as child <b>Static Mesh Components</b> under it. Add any other visuals — extra meshes, Niagara / particles, lights, a World Crosshair — as further children.</p>
+          <p>Build them to match how the Shell mounts the pod, or they'll sit wrong on the array:</p>
+          <ul>
+            <li><b>Anchor on the root.</b> The Shell attaches the whole actor to the Pod Array socket with <span class="mono">SnapToTargetNotIncludingScale</span>, so position meshes relative to the root — the root pivot is what lands on the socket.</li>
+            <li><b>Size on the child meshes, not the actor.</b> On equip the Shell overwrites the actor's scale uniformly with <code>PodMeshScale</code>. Any per-mesh sizing must live on the Static Mesh Components; root/actor scale is discarded.</li>
+            <li><b>Leave root rotation neutral.</b> Equip and in-grid rotation drive the actor's yaw (<code>CurrentRotation × 90°</code>). Bake no yaw into the root, or rotated placements double up.</li>
+          </ul>
+        </li>
+        <li>
+          <h4>Implement the effect events</h4>
+          <p>Override the two <span class="mono">BlueprintImplementableEvent</span>s on <code>APodActor</code>:</p>
+          <ul>
+            <li><code>OnPodEquipped(OwnerCharacter)</code> — apply the pod's effect (buff stats, enable a crosshair, grant an ability).</li>
+            <li><code>OnPodUnequipped(OwnerCharacter)</code> — undo exactly what OnPodEquipped did.</li>
+          </ul>
+          <p>Keep them symmetric so equipping and unequipping always cancel out.</p>
+        </li>
+        <li>
+          <h4>Wire the Blueprint back to the row</h4>
+          <p>Set this Blueprint as the row's <code>PodClass</code>. When the pod is equipped into the Pod Array, <span class="mono">ShellActor</span> spawns it at the matching shell socket and calls <code>OnPodEquipped</code>; removal calls <code>OnPodUnequipped</code>.</p>
+        </li>
+        <li>
+          <h4>Give the pod to the player</h4>
+          <p>Build the runtime <code>UPodItem</code> from the row using the Inventory Component. Pick whichever entry point fits:</p>
+          <ul>
+            <li><code>AddItemFromDataTable(DataTable, RowName)</code> — the core call; returns an <span class="mono">E_InventoryResult</span>.</li>
+            <li><code>TryAddItemByRowName(DataTable, RowName)</code> — boolean convenience wrapper.</li>
+            <li>Place an <b>ItemPickup</b> actor in the level with its <span class="mono">ItemDataTable</span> + <span class="mono">ItemRowName</span> set — walking over it calls the same add path.</li>
+            <li>A crafting recipe whose <code>ResultPodRow</code> points at the row (<code>CraftPod</code>).</li>
+          </ul>
+        </li>
+        <li>
+          <h4>Let the player equip it</h4>
+          <p>In <b>Edit Mode</b> (shell worn, array editable) the player drags the pod from the Field Cache into the Pod Array. That fires <code>OnItemEquipped</code>, which the Shell listens for — no extra code needed per pod. Effects run until the pod is removed.</p>
+        </li>
+      </ol>
+
+      <div class="callout warn">
+        <span class="tag">Watch</span>
+        <div><p><b>Don't nest scene components inside a BP-added Actor Component.</b> For world visuals like a crosshair, keep the mesh as its own component on the actor and hold a transient, Blueprint-assigned reference to it; tune its small offsets in the Blueprint rather than adding new C++ properties. Nesting a scene component in an addable Actor Component leads to archetype/reference breakage.</p></div>
+      </div>
+
+      <div class="callout mem">
+        <span class="tag">Naming</span>
+        <div><p><b>Pod Array</b> = the Shell grid of equipped pods. <b>Field Cache</b> = the field-item inventory. <b>Edit Mode</b> = shell worn, array editable. "Terminal" refers to the device only — use the Field Terminal for the dashboard UI.</p></div>
+      </div>
+
+      <h3 id="pods-special">Special behaviors</h3>
+
+      <h4>Core pods</h4>
+      <p>A pod with <code>bIsCoreSlot = true</code> is equipped through the dedicated <b>Core slot</b> rather than the Pod Array grid, via <code>EquipCorePod(CorePod)</code>. The Inventory Component tracks a <code>DefaultCorePod</code>, built from the State row (<span class="mono">_PodDataTableRow</span> handle) at initialization. Equipping fires <code>OnCorePodChanged</code>.</p>
+
+      <h4>Unique-equip pods</h4>
+      <p>Set <code>bUniqueEquip = true</code> to allow only one of a type in the Pod Array. Grouping is by <code>PodTypeID</code> when set (so a Level 1 and Level 3 of the same family still conflict), otherwise by <code>PodClass</code>. When a duplicate is blocked, <code>FindConflictingUniquePod</code> returns the offender and the component broadcasts <code>OnDuplicatePodBlocked(BlockingPod)</code> for the UI to flash.</p>
+      <div class="callout warn">
+        <span class="tag">Watch</span>
+        <div><p><b>The block event must actually broadcast.</b> When a unique-equip conflict is detected, <code>OnDuplicatePodBlocked</code> has to fire so the UI can react — the conflict flash and the identifying <code>BlockingPod</code> depend on it.</p></div>
+      </div>
+
+      <h4>Black Box pods</h4>
+      <p>A pod with <code>bIsBlackBox = true</code> protects the first <code>PodLevel</code> slots of the Field Cache (slots <span class="mono">0 … PodLevel-1</span>) from <code>ClearFieldCache()</code> while it is equipped. Because protection is keyed on <code>PodLevel</code>, Black Box pods are a natural fit for <code>PodTypeID</code>-based unique-equip so different levels of the box lock each other out.</p>
+    </section>
+
+    <hr class="rule">
+
+    <!-- ============ TEMPLATE ============ -->
+    <section id="template">
+      <div class="sec-head">
+        <div class="sec-kicker"><span class="idx">03</span> Extending</div>
+        <h2 class="sec-title">Adding more asset types</h2>
+        <p class="sec-lede">Pods are the first pipeline documented here. Every other ArcDROP asset follows the same three-beat shape — use it as the template for the next entry.</p>
+      </div>
+      <div class="pill-row">
+        <span class="pill">1 · Data / definition</span>
+        <span class="pill">2 · Blueprint behavior</span>
+        <span class="pill">3 · Runtime handling</span>
+      </div>
+      <p>For each new asset, answer the same questions in order: <b>Where is it authored</b> (which Data Table / row struct, and what does each field mean)? <b>What Blueprint carries its behavior</b> (parent class, key events)? <b>How does it reach the player</b> (which functions or actors give it, and how is it used)?</p>
+      <p style="color:var(--ink-soft)">Candidates to document next — Resources (<span class="mono">F_ResourceDataTableRow</span>), Crafting recipes (<span class="mono">F_CraftingRecipe</span>), Shells, and Field Terminal setup. Tell me which is next and I'll add its section in the same shape.</p>
+    </section>
+
+    <hr class="rule">
+
+    <!-- ============ IDEAS ============ -->
+    <section id="ideas">
+      <div class="sec-head">
+        <div class="sec-kicker"><span class="idx">04</span> Backlog</div>
+        <h2 class="sec-title">Ideas &amp; backlog</h2>
+        <p class="sec-lede">A running scratchpad for ArcDROP ideas — pod concepts, systems, art notes, admin to-dos. Add them straight on the page; they're saved as you go.</p>
+      </div>
+
+      <div class="lead-note">
+        <b>Saved in this browser only.</b> Ideas persist across reloads on this device and browser via local storage — but they don't sync to other devices, and clearing this site's data wipes them. Use <b>Copy all</b> to back them up, or paste them to me and I'll bake them permanently into the page.
+      </div>
+
+      <div class="composer">
+        <textarea id="ideaText" placeholder="Type an idea…  (Ctrl/⌘ + Enter to add)" aria-label="New idea"></textarea>
+        <div class="composer-row">
+          <select id="ideaCat" aria-label="Idea category">
+            <option value="General">General</option>
+            <option value="Pod">Pod</option>
+            <option value="System">System</option>
+            <option value="Art">Art</option>
+            <option value="Admin">Admin</option>
+          </select>
+          <span class="hint">Ctrl/⌘ + Enter</span>
+          <button class="btn primary" id="ideaAdd" type="button">＋ Add idea</button>
+        </div>
+      </div>
+
+      <div class="ideas-toolbar">
+        <span class="ideas-count" id="ideaCount">No ideas yet</span>
+        <button class="btn" id="ideaCopy" type="button">⧉ Copy all</button>
+        <button class="btn danger" id="ideaClear" type="button">Clear all</button>
+      </div>
+
+      <ul class="idea-list" id="ideaList"></ul>
+      <div class="ideas-empty" id="ideaEmpty">Nothing here yet. Your first idea will show up in this list.</div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <span>ArcDROP Handbook · internal reference</span>
+    <span>Send updates to bake into this page — it keeps the same link.</span>
+  </footer>
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById('themeBtn');
+    var KEY = 'arcdrop-handbook-theme';
+
+    function stored() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+    function save(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+
+    var pref = stored();
+    if (pref === 'light' || pref === 'dark') root.setAttribute('data-theme', pref);
+
+    function current() {
+      var attr = root.getAttribute('data-theme');
+      if (attr) return attr;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    btn.addEventListener('click', function () {
+      var next = current() === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      save(next);
+    });
+
+    // Active-section highlight
+    var links = Array.prototype.slice.call(document.querySelectorAll('.sidenav a'));
+    var map = {};
+    links.forEach(function (a) {
+      var id = a.getAttribute('href').slice(1);
+      var el = document.getElementById(id);
+      if (el) map[id] = a;
+    });
+    var targets = Object.keys(map).map(function (id) { return document.getElementById(id); });
+    if ('IntersectionObserver' in window && targets.length) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) {
+            links.forEach(function (l) { l.classList.remove('active'); });
+            var a = map[en.target.id];
+            if (a) a.classList.add('active');
+          }
+        });
+      }, { rootMargin: '-10% 0px -75% 0px', threshold: 0 });
+      targets.forEach(function (t) { io.observe(t); });
+    }
+
+    // ---------- Ideas backlog ----------
+    var IDEAS_KEY = 'arcdrop-handbook-ideas';
+    var CAT_COLOR = {
+      General: 'var(--fac-neutral)',
+      Pod: 'var(--accent)',
+      System: 'var(--cool)',
+      Art: 'var(--fac-viator)',
+      Admin: 'var(--warn)'
+    };
+
+    var elText = document.getElementById('ideaText');
+    var elCat = document.getElementById('ideaCat');
+    var elAdd = document.getElementById('ideaAdd');
+    var elList = document.getElementById('ideaList');
+    var elEmpty = document.getElementById('ideaEmpty');
+    var elCount = document.getElementById('ideaCount');
+    var elCopy = document.getElementById('ideaCopy');
+    var elClear = document.getElementById('ideaClear');
+
+    function loadIdeas() {
+      try {
+        var raw = localStorage.getItem(IDEAS_KEY);
+        var arr = raw ? JSON.parse(raw) : [];
+        return Array.isArray(arr) ? arr : [];
+      } catch (e) { return []; }
+    }
+    function saveIdeas(arr) {
+      try { localStorage.setItem(IDEAS_KEY, JSON.stringify(arr)); } catch (e) {}
+    }
+
+    var ideas = loadIdeas();
+
+    function fmtDate(ts) {
+      try {
+        return new Date(ts).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+      } catch (e) { return ''; }
+    }
+
+    function render() {
+      elList.innerHTML = '';
+      if (!ideas.length) {
+        elEmpty.style.display = '';
+        elCount.textContent = 'No ideas yet';
+      } else {
+        elEmpty.style.display = 'none';
+        elCount.innerHTML = '<b>' + ideas.length + '</b> idea' + (ideas.length === 1 ? '' : 's');
+      }
+      ideas.forEach(function (idea) {
+        var li = document.createElement('li');
+        li.className = 'idea-card';
+        li.style.setProperty('--catc', CAT_COLOR[idea.cat] || CAT_COLOR.General);
+
+        var cat = document.createElement('span');
+        cat.className = 'cat';
+        cat.textContent = idea.cat || 'General';
+
+        var body = document.createElement('div');
+        body.className = 'body';
+        var txt = document.createElement('div');
+        txt.className = 'txt';
+        txt.textContent = idea.text;
+        var meta = document.createElement('div');
+        meta.className = 'meta';
+        meta.textContent = fmtDate(idea.ts);
+        body.appendChild(txt);
+        body.appendChild(meta);
+
+        var del = document.createElement('button');
+        del.className = 'del';
+        del.type = 'button';
+        del.setAttribute('aria-label', 'Delete idea');
+        del.textContent = '✕';
+        del.addEventListener('click', function () {
+          ideas = ideas.filter(function (x) { return x.id !== idea.id; });
+          saveIdeas(ideas);
+          render();
+        });
+
+        li.appendChild(cat);
+        li.appendChild(body);
+        li.appendChild(del);
+        elList.appendChild(li);
+      });
+    }
+
+    function addIdea() {
+      var text = (elText.value || '').trim();
+      if (!text) { elText.focus(); return; }
+      ideas.unshift({
+        id: (Date.now().toString(36) + Math.random().toString(36).slice(2, 6)),
+        text: text,
+        cat: elCat.value,
+        ts: Date.now()
+      });
+      saveIdeas(ideas);
+      elText.value = '';
+      render();
+      elText.focus();
+    }
+
+    elAdd.addEventListener('click', addIdea);
+    elText.addEventListener('keydown', function (e) {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') { e.preventDefault(); addIdea(); }
+    });
+
+    elCopy.addEventListener('click', function () {
+      if (!ideas.length) return;
+      var lines = ideas.map(function (i) {
+        return '- [' + (i.cat || 'General') + '] ' + i.text + '  (' + fmtDate(i.ts) + ')';
+      });
+      var out = 'ArcDROP — Ideas & backlog\n\n' + lines.join('\n');
+      var done = function () {
+        var old = elCopy.textContent;
+        elCopy.textContent = '✓ Copied';
+        setTimeout(function () { elCopy.textContent = old; }, 1400);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(out).then(done, function () { fallbackCopy(out, done); });
+      } else { fallbackCopy(out, done); }
+    });
+
+    function fallbackCopy(text, done) {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); done(); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+
+    elClear.addEventListener('click', function () {
+      if (!ideas.length) return;
+      if (window.confirm('Delete all ' + ideas.length + ' idea' + (ideas.length === 1 ? '' : 's') + '? This cannot be undone.')) {
+        ideas = [];
+        saveIdeas(ideas);
+        render();
+      }
+    });
+
+    render();
+
+    // ---------- Administration registry (editable, localStorage) ----------
+    var REG_PREFIX = 'arcdrop-reg:';
+    var regInputs = Array.prototype.slice.call(document.querySelectorAll('#admin input.edit'));
+    var regStatus = document.getElementById('regStatus');
+    var regCopy = document.getElementById('regCopy');
+    var regClear = document.getElementById('regClear');
+    var regStatusTimer = null;
+
+    function regFlash(msg) {
+      if (!regStatus) return;
+      regStatus.textContent = msg;
+      if (regStatusTimer) clearTimeout(regStatusTimer);
+      regStatusTimer = setTimeout(function () {
+        regStatus.textContent = 'Auto-saves to this browser';
+      }, 1300);
+    }
+
+    regInputs.forEach(function (inp) {
+      var key = REG_PREFIX + inp.getAttribute('data-key');
+      try {
+        var saved = localStorage.getItem(key);
+        if (saved !== null) inp.value = saved;   // else keep the HTML default value
+      } catch (e) {}
+      inp.addEventListener('input', function () {
+        try { localStorage.setItem(key, inp.value); } catch (e) {}
+        regFlash('Saved ✓');
+      });
+    });
+
+    function regLabel(inp) {
+      var dt = inp.closest('.reg-row').querySelector('dt').cloneNode(true);
+      var small = dt.querySelector('small');
+      if (small) small.remove();
+      return dt.textContent.trim();
+    }
+
+    if (regCopy) regCopy.addEventListener('click', function () {
+      var lines = regInputs.map(function (inp) {
+        return regLabel(inp) + ': ' + (inp.value.trim() || '—');
+      });
+      var out = 'ArcDROP — Administration registry\n\n' + lines.join('\n');
+      var done = function () {
+        var old = regCopy.textContent;
+        regCopy.textContent = '✓ Copied';
+        setTimeout(function () { regCopy.textContent = old; }, 1400);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(out).then(done, function () { fallbackCopy(out, done); });
+      } else { fallbackCopy(out, done); }
+    });
+
+    if (regClear) regClear.addEventListener('click', function () {
+      if (!window.confirm('Reset all Administration fields to their defaults? Your saved values in this browser will be cleared.')) return;
+      regInputs.forEach(function (inp) {
+        try { localStorage.removeItem(REG_PREFIX + inp.getAttribute('data-key')); } catch (e) {}
+        inp.value = inp.defaultValue;   // restores GitHub Pages defaults, empties the rest
+      });
+      regFlash('Fields reset');
+    });
+  })();
+</script>
+
+</body>
+</html>
+
