@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ArcDROP — Pod Array Specification</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#0A121B;
+  --void-lift:#101B26;
+  --void-edge:#1B2A38;
+  --slate:#385C7B;
+  --moss:#558B5D;
+  --ochre:#C7A04E;
+  --bone:#E7DFCD;
+  --flux:#4FA8F5;
+  --unsanct:#8E4A4A;
+  --ink:#9DB0BF;
+  --ink-dim:#5D7183;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--void);
+  color:var(--ink);
+  font-family:'IBM Plex Mono',ui-monospace,monospace;
+  font-size:14px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px 80px}
+
+/* ---------- masthead ---------- */
+.mast{
+  border-bottom:1px solid var(--void-edge);
+  padding:44px 0 26px;
+  margin-bottom:38px;
+  position:relative;
+}
+.mast:after{
+  content:"";position:absolute;bottom:-1px;left:0;height:1px;width:120px;
+  background:var(--ochre);
+}
+.eyebrow{
+  font-size:10px;letter-spacing:.34em;text-transform:uppercase;
+  color:var(--ink-dim);margin-bottom:18px;
+}
+h1{
+  font-family:'Archivo Narrow',Impact,sans-serif;
+  font-weight:700;font-size:clamp(38px,9vw,76px);
+  line-height:.92;letter-spacing:-.01em;
+  color:var(--bone);text-transform:uppercase;
+}
+h1 .thin{color:var(--slate);font-weight:400}
+.sub{margin-top:16px;max-width:60ch;color:var(--ink);font-size:13px}
+.meta{
+  margin-top:26px;display:flex;flex-wrap:wrap;gap:10px 28px;
+  font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);
+}
+.meta b{color:var(--ink);font-weight:500}
+
+/* ---------- section headers ---------- */
+h2{
+  font-family:'Archivo Narrow',sans-serif;font-weight:700;
+  font-size:22px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--bone);margin:56px 0 6px;
+  display:flex;align-items:baseline;gap:14px;
+}
+h2 .num{
+  font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:400;
+  color:var(--ochre);letter-spacing:.2em;
+}
+.lede{color:var(--ink-dim);font-size:12.5px;max-width:70ch;margin-bottom:26px}
+
+/* ---------- faction chips ---------- */
+.chip{
+  display:inline-block;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;
+  padding:3px 9px;border:1px solid;border-radius:2px;white-space:nowrap;
+}
+.f-viator{color:var(--slate);border-color:#26445e;background:#0e1b26}
+.f-illumen{color:var(--moss);border-color:#2c4a31;background:#0d1a12}
+.f-arbiter{color:var(--bone);border-color:#3a3a34;background:#191914}
+.f-unsanct{color:#c98181;border-color:#4a2626;background:#1c1010}
+
+/* ---------- pod cards ---------- */
+.pods{display:grid;gap:14px}
+.pod{
+  background:var(--void-lift);
+  border:1px solid var(--void-edge);
+  border-left:3px solid var(--slate);
+  padding:18px 20px;
+  display:grid;
+  grid-template-columns:88px 1fr;
+  gap:20px;
+  align-items:start;
+}
+.pod.v{border-left-color:var(--slate)}
+.pod.i{border-left-color:var(--moss)}
+.pod.a{border-left-color:var(--bone)}
+.pod.u{border-left-color:var(--unsanct)}
+
+.fp{display:grid;grid-template-columns:repeat(3,24px);grid-template-rows:repeat(4,24px);gap:3px}
+.fp i{background:#0c1420;border:1px solid #182635;border-radius:1px}
+.fp i.on{border-color:transparent}
+.fp i.pocket{background:#0c1420;border:1px dashed #33506b}
+
+.pod-head{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:8px}
+.pod-name{
+  font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:19px;
+  letter-spacing:.04em;text-transform:uppercase;color:var(--bone);
+}
+.cells{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim)}
+.flavor{
+  color:var(--ink);font-size:13px;font-style:normal;
+  border-left:1px solid var(--void-edge);padding-left:14px;margin:10px 0 12px;
+  max-width:62ch;
+}
+.rows{display:flex;flex-wrap:wrap;gap:6px 22px;font-size:11px;color:var(--ink-dim)}
+.rows b{color:var(--ink);font-weight:500}
+.shape-note{font-size:11px;color:var(--ink-dim);margin-top:8px;max-width:62ch}
+
+/* ---------- tables ---------- */
+.tbl{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
+.tbl th{
+  text-align:left;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-dim);font-weight:500;padding:0 10px 8px;
+  border-bottom:1px solid var(--void-edge);white-space:nowrap;
+}
+.tbl td{padding:9px 10px;border-bottom:1px solid #142130;color:var(--ink)}
+.tbl td.name{color:var(--bone);white-space:nowrap}
+.tbl tr:hover td{background:#0e1822}
+.num-c{text-align:right;font-variant-numeric:tabular-nums}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.ra{color:var(--bone)}.rb{color:var(--ochre)}.rc{color:var(--moss)}.rd{color:var(--slate)}
+.fx{color:var(--flux)}
+
+/* ---------- charts ---------- */
+.chart{background:var(--void-lift);border:1px solid var(--void-edge);padding:20px;margin-top:8px}
+.bar-row{display:grid;grid-template-columns:132px 1fr 58px;align-items:center;gap:12px;margin-bottom:9px}
+.bar-lab{font-size:11px;color:var(--ink);text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar-track{height:14px;background:#0c1420;position:relative;border:1px solid #16242f}
+.bar-fill{height:100%;transition:width .6s ease}
+.bar-val{font-size:11px;color:var(--ink-dim);font-variant-numeric:tabular-nums}
+.legend{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:16px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-dim)}
+.legend span{display:flex;align-items:center;gap:7px}
+.sw{width:11px;height:11px;border-radius:1px;display:inline-block}
+
+/* ---------- callout ---------- */
+.note{
+  border:1px solid #2f2a18;background:#151206;padding:14px 16px;margin-top:18px;
+  font-size:12px;color:#c9b98a;
+}
+.note b{color:var(--ochre);letter-spacing:.1em;text-transform:uppercase;font-size:10px;display:block;margin-bottom:5px}
+
+/* ---------- build strips ---------- */
+.builds{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.build{background:var(--void-lift);border:1px solid var(--void-edge);padding:16px}
+.build h3{
+  font-family:'Archivo Narrow',sans-serif;font-size:15px;text-transform:uppercase;
+  letter-spacing:.06em;color:var(--bone);margin-bottom:4px;font-weight:600;
+}
+.build .cap{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:12px}
+.grid12{display:grid;grid-template-columns:repeat(3,30px);grid-template-rows:repeat(4,30px);gap:3px;margin-bottom:12px}
+.grid12 i{background:#0c1420;border:1px solid #182635;border-radius:1px}
+.build ul{list-style:none;font-size:11.5px}
+.build li{display:flex;align-items:center;gap:8px;padding:2px 0;color:var(--ink)}
+.build li .sw{flex:none}
+
+.foot{margin-top:60px;padding-top:20px;border-top:1px solid var(--void-edge);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-dim);display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+
+@media (max-width:620px){
+  .pod{grid-template-columns:1fr;gap:14px}
+  .bar-row{grid-template-columns:96px 1fr 46px;gap:8px}
+  .bar-lab{font-size:10px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <div class="eyebrow">NLOC · Logistics Division · Internal</div>
+  <h1>Pod Array<br><span class="thin">Specification</span></h1>
+  <p class="sub">Eleven pod entries — classification, footprint geometry, fabrication cost, and display text. Working draft for the 3×4 mid-mission array.</p>
+  <div class="meta">
+    <span>Project <b>ArcDROP®</b></span>
+    <span>Via Games LLC</span>
+    <span>Rev <b>A</b> · Aug 2026</span>
+    <span>Target array <b>3 × 4 / 12 cells</b></span>
+  </div>
+</header>
+
+<h2><span class="num">01</span> Classification</h2>
+<p class="lede">Every pod carries a faction tag for theming and future set logic. <b>Unsanctioned</b> replaces the former Neutral value in <code>E_PodFaction</code> — it denotes hardware that exists outside NLOC's approval chain entirely, not hardware without an owner.</p>
+
+<div class="scroll">
+<table class="tbl">
+  <tr>
+    <th>Faction</th><th>Mandate</th><th>Reads as</th><th>Pods</th>
+  </tr>
+  <tr><td class="name"><span class="chip f-viator">Viator</span></td><td>Breach &amp; stabilize</td><td>Getting in, and being loud once there</td><td>Arrest · Shot Type Sustain · Shot Type Blast</td></tr>
+  <tr><td class="name"><span class="chip f-illumen">Illumen</span></td><td>Analyze &amp; sequence</td><td>Sensing, measurement, field theory</td><td>Sift · Brand · Petrichor · Ballast</td></tr>
+  <tr><td class="name"><span class="chip f-arbiter">Arbiter</span></td><td>Oversight &amp; enforcement</td><td>Precision and consequence management</td><td>Tether · Black Box · Shot Type Tap</td></tr>
+  <tr><td class="name"><span class="chip f-unsanct">Unsanctioned</span></td><td>None on record</td><td>Powerful, untested, unauthorised</td><td>Signal</td></tr>
+</table>
+</div>
+
+<div class="note"><b>Open item</b> The lore text says "Illumen Division" while the enum says "Illuminate." This document uses Illumen throughout. Pick one and align the enum display name.</div>
+
+<h2><span class="num">02</span> Pod entries</h2>
+<p class="lede">Footprints are drawn on a 3-wide column, top-left anchored, unrotated. Dashed cells are enclosed gaps the pod does not occupy — they remain live array space.</p>
+
+<div class="pods">
+
+  <!-- ARREST -->
+  <article class="pod v">
+    <div class="fp">
+      <i class="on" style="background:#385C7B"></i><i></i><i></i>
+      <i></i><i></i><i></i>
+      <i></i><i></i><i></i>
+      <i></i><i></i><i></i>
+    </div>
+    <div>
+      <div class="pod-head"><span class="pod-name">Arrest Pod</span><span class="chip f-viator">Viator</span><span class="cells">1 cell · single</span></div>
+      <p class="flavor">Manages controlled descent from any elevation. Terrain flagged as impassable is cleared for transit while equipped.</p>
+      <div class="rows"><span>Cost <b>15 D · 10 C</b></span><span>Effort <b>40</b></span><span>Crafts/mission <b>~8</b></span></div>
+      <p class="shape-note">The only pod that fits leftover single cells. Its real value is larger than one cell suggests — it is what makes an enclosed pocket usable. Drives the Ledge Gate pass; there is no fall damage in the game either way, only terrain you can or cannot cross.</p>
+    </div>
+  </article>
+
+  <!-- SIFT -->
+  <article class="pod i">
+    <div class="fp">
+      <i class="on" style="background:#558B5D"></i><i></i><i></i>
+      <i class="on" style="background:#558B5D"></i><i></i><i></i>
+      <i></i><i></i><i></i>
+      <i></i><i></i><i></i>
+    </div>
+    <div>
+      <div class="pod-head"><span class="pod-name">Sift Pod</span><span class="chip f-illumen">Illumen</span><span class="cells">2 cells · vertical domino</span></div>
+      <p class="flavor">Broadens the operative's acquisition envelope. Retrievable material registers at extended range within boundary.</p>
+      <div class="rows"><span>Cost <b>20 D · 15 C</b></span><span>Effort <b>57</b></span><span>Crafts/mission <b>~6</b></span></div>
+      <p class="shape-note">Implementation is an expanded interaction sphere on pickup actors — no drone, no world actor. Boundary-gated like every other benefit.</p>
+    </div>
+  </article>
+
+  <!-- BRAND -->
+  <article class="pod i">
+    <div class="fp">
+      <i class="on" style="background:#558B5D"></i><i></i><i></i>
+      <i class="on" style="background:#558B5D"></i><i></i><i></i>
+      <i></i><i></i><i></i>
+      <i></i><i></i><i></i>
+    </div>
+    <div>
+      <div class="pod-head"><span class="pod-name">Brand Pod</span><span class="chip f-illumen">Illumen</span><span class="cells">2 cells · vertical domino</span></div>
+      <p class="flavor">Munitions carry a persistent optical tag. Any hostile struck remains marked until neutralized.</p>
+      <div class="rows"><span>Cost <b>25 D · 20 C · 20 Flux</b></span><span>Effort <b>76</b></span><span>Crafts/mission <b>~5</b></span></div>
+      <p class="shape-note">Marking is earned by landing a shot rather than granted outright. No occlusion pass in this version — the tag is not visible through terrain. Reserve that for a higher-tier variant.</p>
+    </div>
+  </article>
+
+  <!-- TAP -->
+  <article class="pod a">
+    <div class="fp">
+      <i class="on" style="background:#E7DFCD"></i><i></i><i></i>
+      <i class="on" style="background:#E7DFCD"></i><i></i><i></i>
+      <i></i><i></i><i></i>
+      <i></i><i></i><i></i>
+    </div>
+    <div>
+      <div class="pod-head"><span class="pod-name">Shot Type · Tap</span><span class="chip f-arbiter">Arbiter</span><span class="cells">2 cells · vertical domino</span></div>
+      <p class="flavor">Single discharge per input. Higher yield per round, paced to the operative's timing.</p>
+      <div class="rows"><span>Cost <b>20 C · 15 D</b></span><span>Effort <b>60</b></span><span>Crafts/mission <b>~6</b></span></div>
+      <p class="shape-note">Shot Types are unique-equip: one at a time until higher-level variants unlock a second and third weapon slot. Naming describes the operative's input, not the mechanism.</p>
+    </div>
+  </article>
+
+  <!-- SUSTAIN -->
+  <article class="pod v">
+    <div class="fp">
+      <i class="on" style="background:#385C7B"></i><i></i><i></i>
+      <i class="on" style="background:#385C7B"></i><i></i><i></i>
+      <i class="on" style="background:#385C7B"></i><i></i><i></i>
+      <i></i><i></i><i></i>
+    </div>
+    <div>
+      <div class="pod-head"><span class="pod-name">Shot Type · Sustain</span><span class="chip f-viator">Viator</span><span class="cells">3 cells · straight column</span></div>
+      <p class="flavor">Continuous discharge while input is held. Reduced yield per round, compensated by volume.</p>
+      <div class="rows"><span>Cost <b>30 C · 15 B · 40 Flux</b></span><span>Effort <b>145</b></span><span>Crafts/mission <b>~2–3</b></span></div>
+      <p class="shape-note">Three cells, but a polite three — a straight column leaves the neighbouring columns whole.</p>
+    </div>
+  </article>
+
+  <!-- BLAST -->
+  <article class="pod v">
+    <div class="fp">
+      <i class="on" style="background:#385C7B"></i><i></i><i></i>
+      <i class="on" style="background:#385C7B"></i><i></i><i></i>
+      <i class="on" style="background:#385C7B"></i><i></i><i></i>
+      <i class="on" style="background:#385C7B"></i><i class="on" style="background:#385C7B"></i><i></i>
+    </div>
+    <div>
+      <div class="pod-head"><span class="pod-name">Shot Type · Blast</span><span class="chip f-viator">Viator</span><span class="cells">5 cells · L, full column + kick</span></div>
+      <p class="flavor">Wide-spectrum discharge. Coherent to extreme range, with a long cycle between shots.</p>
+      <div class="rows"><span>Cost <b>5 A · 20 B · 10 C · 120 Flux</b></span><span>Effort <b>209</b></span><span>Crafts/mission <b>~2</b></span></div>
+      <p class="shape-note">The inversion: a shotgun that keeps coherence at range rather than losing it. Slow cycle and a hostile footprint are the whole downside — the foot kick out of the column is what breaks a neighbour's build.</p>
+    </div>
+  </article>
+
+  <!-- PETRICHOR -->
+  <article class="pod i">
+    <div class="fp">
+      <i class="on" style="background:#558B5D"></i><i></i><i></i>
+      <i class="on" style="background:#558B5D"></i><i class="on" style="background:#558B5D"></i><i></i>
+      <i></i><i></i><i></i>
+      <i></i><i></i><i></i>
+    </div>
+    <div>
+      <div class="pod-head"><span class="pod-name">Petrichor Pod</span><span class="chip f-illumen">Illumen</span><span class="cells">3 cells · L</span></div>
+      <p class="flavor">Rectifies ambient storm discharge into usable current. AUX regeneration is elevated for the duration of active precipitation.</p>
+      <div class="rows"><span>Cost <b>25 C · 20 B · 60 Flux</b></span><span>Effort <b>165</b></span><span>Crafts/mission <b>~2</b></span></div>
+      <p class="shape-note">Conditional power at an awkward shape. Depends on the Milestone 3 Weather System — first pod to make weather mechanical rather than atmospheric. Ties naturally into the Supercharged loop.</p>
+    </div>
+  </article>
+
+  <!-- BLACK BOX -->
+  <article class="pod a">
+    <div class="fp">
+      <i class="on" style="background:#E7DFCD"></i><i></i><i></i>
+      <i></i><i class="on" style="background:#E7DFCD"></i><i></i>
+      <i></i><i></i><i></i>
+      <i></i><i></i><i></i>
+    </div>
+    <div>
+      <div class="pod-head"><span class="pod-name">Black Box Pod</span><span class="chip f-arbiter">Arbiter</span><span class="cells">2 cells · diagonal, non-contiguous</span></div>
+      <p class="flavor">Hardened single-cell vault, rated for total suit loss. One Field Cache slot is recovered intact after catastrophic failure.</p>
+      <div class="rows"><span>Cost <b>20 C · 10 B · 50 Flux</b></span><span>Effort <b>100</b> <span style="color:var(--ochre)">(baseline)</span></span><span>Crafts/mission <b>3–4</b></span></div>
+      <p class="shape-note">Existing pod, folded into this spec as the cost baseline. Two cells that fragment the array — you pay in geometry rather than volume.</p>
+    </div>
+  </article>
+
+  <!-- TETHER -->
+  <article class="pod a">
+    <div class="fp">
+      <i class="on" style="background:#E7DFCD"></i><i class="on" style="background:#E7DFCD"></i><i class="on" style="background:#E7DFCD"></i>
+      <i></i><i class="on" style="background:#E7DFCD"></i><i></i>
+      <i></i><i></i><i></i>
+      <i></i><i></i><i></i>
+    </div>
+    <div>
+      <div class="pod-head"><span class="pod-name">Tether Pod</span><span class="chip f-arbiter">Arbiter</span><span class="cells">4 cells · T</span></div>
+      <p class="flavor">Severs the Shell on catastrophic suit failure and throws it clear to the last Gravity Well, preventing hostile capture of the array. The Field Cache does not survive transit.</p>
+      <div class="rows"><span>Cost <b>10 A · 25 B · 250 Flux</b></span><span>Effort <b>300</b> <span style="color:var(--ochre)">(3× baseline)</span></span><span>Crafts/mission <b>1–2</b></span></div>
+      <p class="shape-note">Narrow insurance against one catastrophe: the invasion. Burns out on use; the spent husk holds its slots until you get home. Not standard issue because each unit is built from already-inverted Flux — every Tether costs a charge someone has already spent. Center-column T is deliberately poisonous to neighbours.</p>
+    </div>
+  </article>
+
+  <!-- BALLAST -->
+  <article class="pod i">
+    <div class="fp">
+      <i class="on" style="background:#558B5D"></i><i class="on" style="background:#558B5D"></i><i class="on" style="background:#558B5D"></i>
+      <i></i><i class="on" style="background:#558B5D"></i><i></i>
+      <i class="on" style="background:#558B5D"></i><i class="on" style="background:#558B5D"></i><i class="on" style="background:#558B5D"></i>
+      <i></i><i></i><i></i>
+    </div>
+    <div>
+      <div class="pod-head"><span class="pod-name">Ballast Pod</span><span class="chip f-illumen">Illumen</span><span class="cells">7 cells · I-beam</span></div>
+      <p class="flavor">Mass-heavy field amplifier. Extends the Shell's boundary projection well past standard tolerance.</p>
+      <div class="rows"><span>Cost <b>8 A · 40 B · 200 Flux</b></span><span>Effort <b>347</b></span><span>Crafts/mission <b>~1</b></span></div>
+      <p class="shape-note">Seven of twelve cells. The two side gaps are single-cell pockets — Arrest fits, nothing else does. This is the pod that turns the array into a one-decision build.</p>
+    </div>
+  </article>
+
+  <!-- SIGNAL -->
+  <article class="pod u">
+    <div class="fp">
+      <i class="on" style="background:#8E4A4A"></i><i class="on" style="background:#8E4A4A"></i><i class="on" style="background:#8E4A4A"></i>
+      <i class="on" style="background:#8E4A4A"></i><i class="pocket"></i><i class="on" style="background:#8E4A4A"></i>
+      <i></i><i class="on" style="background:#8E4A4A"></i><i></i>
+      <i></i><i></i><i></i>
+    </div>
+    <div>
+      <div class="pod-head"><span class="pod-name">Signal Pod</span><span class="chip f-unsanct">Unsanctioned</span><span class="cells">6 cells · arch with enclosed pocket</span></div>
+      <p class="flavor">An unlicensed channel, patched into frequencies Command retired years ago. Terminal access grants contracts nobody files a report on — paid in full, provided you stay in range.</p>
+      <div class="rows"><span>Cost <b>12 A · 20 B · 30 C · 400 Flux</b></span><span>Effort <b>380</b></span><span>Crafts/mission <b>~1</b></span></div>
+      <p class="shape-note">Spawns a Shell interior room with its own contract terminal. Jobs are accepted and paid only while the pod is equipped and the operative is inside the boundary — it is a content dispenser that argues for anchored play. Fiction: a rogue Illumen running a pirate broadcast through dimensional channels. The enclosed center cell is a real gap, not a socket; it just happens to fit almost nothing.</p>
+    </div>
+  </article>
+
+</div>
+
+<h2><span class="num">03</span> Cost matrix</h2>
+<p class="lede">Resource rarity runs A (rarest) → D (commonest). Black Box is the anchor at 3–4 crafts per mission; Tether was set at roughly triple that cost. All other values are extrapolated from those two anchors and are placeholders for balance passes.</p>
+
+<div class="scroll">
+<table class="tbl">
+  <tr>
+    <th>Pod</th><th>Faction</th><th class="num-c">Cells</th><th class="num-c ra">A</th><th class="num-c rb">B</th><th class="num-c rc">C</th><th class="num-c rd">D</th><th class="num-c fx">Flux</th><th class="num-c">Effort</th><th class="num-c">Crafts</th>
+  </tr>
+  <tr><td class="name">Arrest</td><td><span class="chip f-viator">Viator</span></td><td class="num-c">1</td><td class="num-c">—</td><td class="num-c">—</td><td class="num-c">10</td><td class="num-c">15</td><td class="num-c">—</td><td class="num-c">40</td><td class="num-c">~8</td></tr>
+  <tr><td class="name">Sift</td><td><span class="chip f-illumen">Illumen</span></td><td class="num-c">2</td><td class="num-c">—</td><td class="num-c">—</td><td class="num-c">15</td><td class="num-c">20</td><td class="num-c">—</td><td class="num-c">57</td><td class="num-c">~6</td></tr>
+  <tr><td class="name">Shot Type · Tap</td><td><span class="chip f-arbiter">Arbiter</span></td><td class="num-c">2</td><td class="num-c">—</td><td class="num-c">—</td><td class="num-c">20</td><td class="num-c">15</td><td class="num-c">—</td><td class="num-c">60</td><td class="num-c">~6</td></tr>
+  <tr><td class="name">Brand</td><td><span class="chip f-illumen">Illumen</span></td><td class="num-c">2</td><td class="num-c">—</td><td class="num-c">—</td><td class="num-c">20</td><td class="num-c">25</td><td class="num-c">20</td><td class="num-c">76</td><td class="num-c">~5</td></tr>
+  <tr><td class="name">Black Box</td><td><span class="chip f-arbiter">Arbiter</span></td><td class="num-c">2</td><td class="num-c">—</td><td class="num-c">10</td><td class="num-c">20</td><td class="num-c">—</td><td class="num-c">50</td><td class="num-c">100</td><td class="num-c">3–4</td></tr>
+  <tr><td class="name">Shot Type · Sustain</td><td><span class="chip f-viator">Viator</span></td><td class="num-c">3</td><td class="num-c">—</td><td class="num-c">15</td><td class="num-c">30</td><td class="num-c">—</td><td class="num-c">40</td><td class="num-c">145</td><td class="num-c">~2–3</td></tr>
+  <tr><td class="name">Petrichor</td><td><span class="chip f-illumen">Illumen</span></td><td class="num-c">3</td><td class="num-c">—</td><td class="num-c">20</td><td class="num-c">25</td><td class="num-c">—</td><td class="num-c">60</td><td class="num-c">165</td><td class="num-c">~2</td></tr>
+  <tr><td class="name">Shot Type · Blast</td><td><span class="chip f-viator">Viator</span></td><td class="num-c">5</td><td class="num-c">5</td><td class="num-c">20</td><td class="num-c">10</td><td class="num-c">—</td><td class="num-c">120</td><td class="num-c">209</td><td class="num-c">~2</td></tr>
+  <tr><td class="name">Tether</td><td><span class="chip f-arbiter">Arbiter</span></td><td class="num-c">4</td><td class="num-c">10</td><td class="num-c">25</td><td class="num-c">—</td><td class="num-c">—</td><td class="num-c">250</td><td class="num-c">300</td><td class="num-c">1–2</td></tr>
+  <tr><td class="name">Ballast</td><td><span class="chip f-illumen">Illumen</span></td><td class="num-c">7</td><td class="num-c">8</td><td class="num-c">40</td><td class="num-c">—</td><td class="num-c">—</td><td class="num-c">200</td><td class="num-c">347</td><td class="num-c">~1</td></tr>
+  <tr><td class="name">Signal</td><td><span class="chip f-unsanct">Unsanct.</span></td><td class="num-c">6</td><td class="num-c">12</td><td class="num-c">20</td><td class="num-c">30</td><td class="num-c">—</td><td class="num-c">400</td><td class="num-c">380</td><td class="num-c">~1</td></tr>
+</table>
+</div>
+
+<div class="note"><b>Effort index</b> A composite of acquisition difficulty, not a resource count: A×10 + B×4 + C×1.5 + D×1 + Flux×0.1, normalised so Black Box = 100. It exists to compare pods across different resource mixes on one axis.</div>
+
+<h2><span class="num">04</span> Acquisition effort</h2>
+<p class="lede">Sorted ascending. The gap between Brand and Sustain is where "sidegrade" ends and "commitment" begins.</p>
+
+<div class="chart">
+  <div class="bar-row"><div class="bar-lab">Arrest</div><div class="bar-track"><div class="bar-fill" style="width:10.5%;background:#385C7B"></div></div><div class="bar-val">40</div></div>
+  <div class="bar-row"><div class="bar-lab">Sift</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#558B5D"></div></div><div class="bar-val">57</div></div>
+  <div class="bar-row"><div class="bar-lab">Shot · Tap</div><div class="bar-track"><div class="bar-fill" style="width:15.8%;background:#E7DFCD"></div></div><div class="bar-val">60</div></div>
+  <div class="bar-row"><div class="bar-lab">Brand</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#558B5D"></div></div><div class="bar-val">76</div></div>
+  <div class="bar-row"><div class="bar-lab">Black Box</div><div class="bar-track"><div class="bar-fill" style="width:26.3%;background:#E7DFCD"></div></div><div class="bar-val">100</div></div>
+  <div class="bar-row"><div class="bar-lab">Shot · Sustain</div><div class="bar-track"><div class="bar-fill" style="width:38.2%;background:#385C7B"></div></div><div class="bar-val">145</div></div>
+  <div class="bar-row"><div class="bar-lab">Petrichor</div><div class="bar-track"><div class="bar-fill" style="width:43.4%;background:#558B5D"></div></div><div class="bar-val">165</div></div>
+  <div class="bar-row"><div class="bar-lab">Shot · Blast</div><div class="bar-track"><div class="bar-fill" style="width:55%;background:#385C7B"></div></div><div class="bar-val">209</div></div>
+  <div class="bar-row"><div class="bar-lab">Tether</div><div class="bar-track"><div class="bar-fill" style="width:78.9%;background:#E7DFCD"></div></div><div class="bar-val">300</div></div>
+  <div class="bar-row"><div class="bar-lab">Ballast</div><div class="bar-track"><div class="bar-fill" style="width:91.3%;background:#558B5D"></div></div><div class="bar-val">347</div></div>
+  <div class="bar-row"><div class="bar-lab">Signal</div><div class="bar-track"><div class="bar-fill" style="width:100%;background:#8E4A4A"></div></div><div class="bar-val">380</div></div>
+  <div class="legend">
+    <span><i class="sw" style="background:#385C7B"></i>Viator</span>
+    <span><i class="sw" style="background:#558B5D"></i>Illumen</span>
+    <span><i class="sw" style="background:#E7DFCD"></i>Arbiter</span>
+    <span><i class="sw" style="background:#8E4A4A"></i>Unsanctioned</span>
+  </div>
+</div>
+
+<h2><span class="num">05</span> Effort vs. footprint</h2>
+<p class="lede">Cell count and cost should track loosely but not lock together — shape is its own tax. Black Box sits high for its two cells because it fragments; Blast sits below the line because its cost is paid in geometry.</p>
+
+<div class="chart">
+<svg viewBox="0 0 700 340" width="100%" role="img" aria-label="Line chart of acquisition effort plotted against footprint cell count">
+  <!-- grid -->
+  <g stroke="#1B2A38" stroke-width="1">
+    <line x1="60" y1="20" x2="680" y2="20"/><line x1="60" y1="80" x2="680" y2="80"/>
+    <line x1="60" y1="140" x2="680" y2="140"/><line x1="60" y1="200" x2="680" y2="200"/>
+    <line x1="60" y1="260" x2="680" y2="260"/><line x1="60" y1="290" x2="680" y2="290"/>
+  </g>
+  <g fill="#5D7183" font-family="IBM Plex Mono, monospace" font-size="10">
+    <text x="48" y="24" text-anchor="end">400</text>
+    <text x="48" y="84" text-anchor="end">320</text>
+    <text x="48" y="144" text-anchor="end">240</text>
+    <text x="48" y="204" text-anchor="end">160</text>
+    <text x="48" y="264" text-anchor="end">80</text>
+    <text x="48" y="294" text-anchor="end">0</text>
+    <text x="20" y="160" text-anchor="middle" transform="rotate(-90 20 160)" fill="#5D7183" letter-spacing="2">EFFORT</text>
+  </g>
+  <!-- x labels: cells 1..7 -->
+  <g fill="#5D7183" font-family="IBM Plex Mono, monospace" font-size="10" text-anchor="middle">
+    <text x="105" y="312">1</text><text x="200" y="312">2</text><text x="295" y="312">3</text>
+    <text x="390" y="312">4</text><text x="485" y="312">5</text><text x="580" y="312">6</text><text x="675" y="312">7</text>
+    <text x="390" y="332" letter-spacing="2">FOOTPRINT — CELLS OCCUPIED</text>
+  </g>
+
+  <!-- trend line through per-cell medians -->
+  <polyline fill="none" stroke="#C7A04E" stroke-width="1.5" stroke-dasharray="5 4"
+    points="105,275 200,264 295,232 390,177 485,212 580,148 675,160"/>
+
+  <!-- points -->
+  <g>
+    <circle cx="105" cy="275" r="5" fill="#385C7B"/>
+    <circle cx="200" cy="268" r="5" fill="#558B5D"/>
+    <circle cx="200" cy="267" r="5" fill="#E7DFCD"/>
+    <circle cx="200" cy="261" r="5" fill="#558B5D"/>
+    <circle cx="200" cy="215" r="5" fill="#E7DFCD"/>
+    <circle cx="295" cy="181" r="5" fill="#385C7B"/>
+    <circle cx="295" cy="166" r="5" fill="#558B5D"/>
+    <circle cx="390" cy="65" r="5" fill="#E7DFCD"/>
+    <circle cx="485" cy="133" r="5" fill="#385C7B"/>
+    <circle cx="580" cy="5" r="5" fill="#8E4A4A"/>
+    <circle cx="675" cy="30" r="5" fill="#558B5D"/>
+  </g>
+  <g fill="#9DB0BF" font-family="IBM Plex Mono, monospace" font-size="9.5">
+    <text x="116" y="279">Arrest</text>
+    <text x="211" y="272">Sift / Tap / Brand</text>
+    <text x="211" y="219">Black Box</text>
+    <text x="306" y="185">Sustain</text>
+    <text x="306" y="163">Petrichor</text>
+    <text x="401" y="69">Tether</text>
+    <text x="496" y="137">Blast</text>
+    <text x="520" y="22" text-anchor="end">Signal</text>
+    <text x="670" y="48" text-anchor="end">Ballast</text>
+  </g>
+</svg>
+</div>
+
+<h2><span class="num">06</span> Array occupancy</h2>
+<p class="lede">Eleven pods, 37 cells total, averaging 3.4 cells each. On a 12-cell array that lands at three to five equipped pods depending on the build — four is the intended centre of gravity.</p>
+
+<div class="builds">
+
+  <div class="build">
+    <h3>Standard patrol</h3>
+    <div class="cap">4 pods · 11 / 12 cells · 1 free</div>
+    <div class="grid12">
+      <i style="background:#385C7B"></i><i style="background:#558B5D"></i><i style="background:#6FA877"></i>
+      <i style="background:#385C7B"></i><i style="background:#558B5D"></i><i style="background:#6FA877"></i>
+      <i style="background:#385C7B"></i><i></i><i style="background:#E7DFCD"></i>
+      <i style="background:#385C7B"></i><i style="background:#385C7B"></i><i style="background:#E7DFCD"></i>
+    </div>
+    <ul>
+      <li><i class="sw" style="background:#385C7B"></i>Shot Type · Blast — 5</li>
+      <li><i class="sw" style="background:#558B5D"></i>Sift — 2</li>
+      <li><i class="sw" style="background:#6FA877"></i>Brand — 2</li>
+      <li><i class="sw" style="background:#E7DFCD"></i>Shot Type · Tap — 2</li>
+    </ul>
+  </div>
+
+  <div class="build">
+    <h3>Deep push · insured</h3>
+    <div class="cap">3 pods · 9 / 12 cells · 3 free</div>
+    <div class="grid12">
+      <i style="background:#E7DFCD"></i><i style="background:#E7DFCD"></i><i style="background:#E7DFCD"></i>
+      <i style="background:#385C7B"></i><i style="background:#E7DFCD"></i><i style="background:#558B5D"></i>
+      <i style="background:#385C7B"></i><i></i><i style="background:#558B5D"></i>
+      <i style="background:#385C7B"></i><i></i><i></i>
+    </div>
+    <ul>
+      <li><i class="sw" style="background:#E7DFCD"></i>Tether — 4</li>
+      <li><i class="sw" style="background:#385C7B"></i>Shot Type · Sustain — 3</li>
+      <li><i class="sw" style="background:#558B5D"></i>Sift — 2</li>
+    </ul>
+  </div>
+
+  <div class="build">
+    <h3>Anchored contractor</h3>
+    <div class="cap">3 pods · 9 / 12 cells · 3 free</div>
+    <div class="grid12">
+      <i style="background:#8E4A4A"></i><i style="background:#8E4A4A"></i><i style="background:#8E4A4A"></i>
+      <i style="background:#8E4A4A"></i><i style="background:#385C7B"></i><i style="background:#8E4A4A"></i>
+      <i></i><i style="background:#8E4A4A"></i><i></i>
+      <i style="background:#E7DFCD"></i><i style="background:#E7DFCD"></i><i></i>
+    </div>
+    <ul>
+      <li><i class="sw" style="background:#8E4A4A"></i>Signal — 6</li>
+      <li><i class="sw" style="background:#385C7B"></i>Arrest — 1 (in the pocket)</li>
+      <li><i class="sw" style="background:#E7DFCD"></i>Shot Type · Tap — 2</li>
+    </ul>
+  </div>
+
+  <div class="build">
+    <h3>Ballast run</h3>
+    <div class="cap">2 pods · 8 / 12 cells · 4 free but fragmented</div>
+    <div class="grid12">
+      <i style="background:#558B5D"></i><i style="background:#558B5D"></i><i style="background:#558B5D"></i>
+      <i style="background:#385C7B"></i><i style="background:#558B5D"></i><i></i>
+      <i style="background:#558B5D"></i><i style="background:#558B5D"></i><i style="background:#558B5D"></i>
+      <i></i><i></i><i></i>
+    </div>
+    <ul>
+      <li><i class="sw" style="background:#558B5D"></i>Ballast — 7</li>
+      <li><i class="sw" style="background:#385C7B"></i>Arrest — 1</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="note"><b>Tier colour — open item</b> The Terrestrial anchor table maps footprint size to tier colour: 1 cell Slate, 2 cells Moss, 3 cells Ochre, 4 cells Bone. Five pods here exceed 4 cells (Blast 5, Signal 6, Ballast 7) and have no anchor. Either extend the gradient above Bone, or cap tier at 4 and let large pods read by faction colour instead.</div>
+
+<div class="note"><b>Not yet costed</b> Battery pods sit outside this table — they raise Max HP rather than occupying a benefit slot, and need their own cost curve.</div>
+
+<footer class="foot">
+  <span>Via Games LLC · ArcDROP®</span>
+  <span>Working draft — costs are placeholders</span>
+</footer>
+
+</div>
+</body>
+</html>
